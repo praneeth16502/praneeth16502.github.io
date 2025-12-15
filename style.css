@@ -95,7 +95,7 @@ body::before {
   padding-bottom: 120px;
   background-image: url("banner.jpg");
   background-size: cover;
-  background-position: center 0px;
+  background-position: center top;
   background-repeat: no-repeat;
   overflow: hidden;
   transition: background-position 0.1s linear;
