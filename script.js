@@ -20,3 +20,26 @@ const observer = new IntersectionObserver(
 );
 
 sections.forEach(section => observer.observe(section));
+
+document.addEventListener("DOMContentLoaded", () => {
+  const hero = document.querySelector(".hero");
+  if (!hero) return;
+
+  window.addEventListener("scroll", () => {
+    const scrollY = window.scrollY;
+    const heroHeight = hero.offsetHeight;
+
+    if (scrollY <= heroHeight) {
+      // Subtle parallax effect
+      hero.style.backgroundPosition = `center ${scrollY * 0.3}px`;
+
+      // Gradient intensity animation
+      const fadeFactor = Math.min(scrollY / heroHeight, 1);
+
+      hero.style.setProperty("--g-start", 0.9 - fadeFactor * 0.4);
+      hero.style.setProperty("--g-mid", 0.55 - fadeFactor * 0.3);
+      hero.style.setProperty("--g-light", 0.15 - fadeFactor * 0.1);
+    }
+  });
+});
+
