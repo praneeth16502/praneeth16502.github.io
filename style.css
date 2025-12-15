@@ -89,18 +89,12 @@ body::before {
 
 .hero {
   height: 100vh;
-  position: relative;
   display: flex;
   align-items: flex-end;
   padding-bottom: 120px;
-  background-image: url("banner.jpg");
-  background-size: cover;
-  background-position: center top;
-  background-repeat: no-repeat;
-  overflow: hidden;
-  transition: background-position 0.1s linear;
+  position: relative;
+  background: url("banner.jpg") center center / cover no-repeat;
 }
-
 
 .hero::before {
   content: "";
@@ -108,15 +102,13 @@ body::before {
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, var(--g-start, 0.9)) 0%,
-    rgba(0, 0, 0, var(--g-mid, 0.55)) 45%,
-    rgba(0, 0, 0, var(--g-light, 0.15)) 75%,
-    rgba(0, 0, 0, 0) 100%
+    rgba(0,0,0,0.85) 0%,
+    rgba(0,0,0,0.4) 40%,
+    rgba(0,0,0,0.1) 70%,
+    rgba(0,0,0,0) 100%
   );
   z-index: 1;
-  transition: background 0.2s ease-out;
 }
-
 
 
 
@@ -379,5 +371,3 @@ iframe {
     transform: translateY(0);
   }
 }
-
-
