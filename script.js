@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (scrollY <= heroHeight) {
       // Subtle parallax effect
-      hero.style.backgroundPosition = `center ${scrollY * 0.3}px`;
+      hero.style.backgroundPosition = `center calc(0px - ${scrollY * 0.25}px)`;
 
       // Gradient intensity animation
       const fadeFactor = Math.min(scrollY / heroHeight, 1);
