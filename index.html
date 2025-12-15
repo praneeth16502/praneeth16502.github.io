@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Praneeth Villuri</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<header>
+  <h1>Praneeth Villuri</h1>
+  <p class="subtitle">Software Developer | Machine Learning</p>
+
+  <button id="theme-toggle">🌙 Dark Mode</button>
+
+  <p class="meta">
+    Hyderabad, India ·
+    <a href="mailto:pranee16502@gmail.com">Email</a> ·
+    <a href="https://linkedin.com/in/praneeth-villuri">LinkedIn</a> ·
+    <a href="https://github.com/praneeth16502">GitHub</a> ·
+    <a href="https://kaggle.com/">Kaggle</a> ·
+    <a href="/resume.pdf" target="_blank"><b>Resume (PDF)</b></a>
+  </p>
+</header>
+
+<section>
+  <h2>Profile</h2>
+  <p>
+    Machine Learning–oriented Software Developer with 2.5+ years of experience
+    building full-stack features, backend services, and data workflows for
+    SAP Analytics Cloud, a large-scale enterprise analytics platform.
+    Delivered sentiment-analysis capabilities involving NLP preprocessing,
+    model evaluation, and integration of ML outputs into production workflows.
+    Strong Python background with experience in data-driven and cloud-based systems.
+  </p>
+</section>
+
+<section>
+  <h2>Experience</h2>
+
+  <h3>SAP Analytics Cloud — Developer Associate</h3>
+  <p class="date">July 2023 – Present</p>
+  <ul>
+    <li>Performed deep forensic analysis of metadata and story lineage to resolve major customer escalations.</li>
+    <li>Implemented sentiment-analysis features using NLP preprocessing and integrated results into UI workflows.</li>
+    <li>Validated cloud workflows across AWS, IBP, and HANA Cloud using API-based testing.</li>
+    <li>Built automation and regression checks for critical data workflows.</li>
+    <li>Identified and corrected licensing inconsistencies affecting Query Builder and dashboard access across tenants.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Projects</h2>
+
+  <h3>Guess IT! – Online Multiplayer Trivia Game</h3>
+  <p class="tech">Python · REST · React · PostgreSQL · NLP</p>
+  <ul>
+    <li>Designed and deployed a cloud-hosted multiplayer trivia platform using NLP-based keyword extraction and similarity mapping.</li>
+    <li>Built data pipelines using web scraping and text preprocessing.</li>
+    <li>Published curated datasets on Kaggle with 200+ cumulative downloads.</li>
+  </ul>
+
+  <h3>Additional ML Projects</h3>
+  <ul>
+    <li><b>Blind Assistance System:</b> Object detection with text-to-speech to provide real-time audio feedback.</li>
+    <li><b>Human Activity Recognition:</b> Machine learning–based classification of sensor-driven motion patterns.</li>
+    <li><b>Restaurant Success Prediction:</b> Supervised learning model using business, review, and location features.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Publications</h2>
+  <ul>
+    <li>
+      Villuri, P., et al. <i>Paper Title</i>.
+      World Conference on Computational Intelligence (WCCI), 2019.
+    </li>
+  </ul>
+</section>
+
+<section>
+  <h2>Skills</h2>
+  <p>
+    <b>Languages:</b> Python, Java, SQL, JavaScript<br/>
+    <b>ML & Data:</b> NLP, Object Detection, Data Preprocessing, Model Evaluation<br/>
+    <b>Frameworks:</b> FastAPI, Flask, React<br/>
+    <b>Tools:</b> Git, Docker, PostgreSQL, REST APIs
+  </p>
+</section>
+
+<footer>
+  <p>© 2025 Praneeth Villuri</p>
+</footer>
+
+<script>
+  const toggle = document.getElementById('theme-toggle');
+  const prefersDark = localStorage.getItem('theme') === 'dark';
+
+  if (prefersDark) {
+    document.body.classList.add('dark');
+    toggle.textContent = '☀️ Light Mode';
+  }
+
+  toggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    const isDark = document.body.classList.contains('dark');
+    toggle.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  });
+</script>
+
+</body>
+</html>
