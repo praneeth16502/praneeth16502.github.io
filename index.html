@@ -2,106 +2,131 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <title>Praneeth Villuri | Software Engineer & AI/ML</title>
+  <title>Praneeth Villuri | Portfolio</title>
 
   <!-- SEO -->
-  <meta name="description" content="Software Engineer with experience in SAP Analytics Cloud, NLP, Computer Vision, and ML-driven product features." />
-  <meta name="keywords" content="Software Engineer, Machine Learning, NLP, Computer Vision, SAP Analytics Cloud" />
+  <meta name="description" content="Software Engineer with experience in SAP Analytics Cloud, AI/ML, NLP, and Computer Vision." />
+
+  <!-- Netflix-like font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-  <!-- Theme Toggle -->
-  <button id="themeToggle" class="theme-toggle">☀️ / 🌙</button>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="logo">Praneeth</div>
+    <div class="nav-links">
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#resume">Resume</a>
+      <a href="#contact">Contact</a>
+      <button id="themeToggle">🌙</button>
+    </div>
+  </nav>
 
   <!-- HERO -->
-  <section class="hero">
-    <h1>Praneeth Villuri</h1>
-    <p class="subtitle">
-      Software Engineer · AI / ML · SAP Analytics Cloud
-    </p>
-
-    <div class="cta">
-      <a href="resume.pdf" class="btn" target="_blank">Download Resume</a>
-      <a href="https://github.com/praneeth16502" class="btn secondary" target="_blank">GitHub</a>
-      <a href="https://linkedin.com/in/praneeth-villuri" class="btn secondary" target="_blank">LinkedIn</a>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section>
-    <h2>About</h2>
-    <div class="card">
-      <p>
-        Software Engineer with 2.5+ years of experience building large-scale analytics features
-        for SAP Analytics Cloud. Experienced in full-stack development, backend systems, and
-        data processing, with hands-on work in NLP-based sentiment analysis and computer vision projects.
+  <header class="hero">
+    <div class="hero-content">
+      <h1>Praneeth Villuri</h1>
+      <p class="tagline">
+        Software Engineer · AI / ML · SAP Analytics Cloud
       </p>
+      <p class="hero-desc">
+        Building large-scale analytics platforms with applied machine learning,
+        NLP, and computer vision.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="resume.pdf" target="_blank" class="btn primary">▶ Resume</a>
+        <a href="#projects" class="btn secondary">More Info</a>
+      </div>
     </div>
-  </section>
+  </header>
 
   <!-- EXPERIENCE -->
-  <section>
+  <section class="row section-hidden" id="experience">
     <h2>Experience</h2>
-
-    <div class="card">
-      <h3>SAP Analytics Cloud — Developer Associate</h3>
-      <p class="meta">SAP Labs India · 2023 – Present</p>
-      <ul>
-        <li>Built and maintained full-stack features for enterprise analytics workflows used by global customers.</li>
-        <li>Led sentiment-analysis–driven features involving text preprocessing and integration into product UI.</li>
-        <li>Resolved high-impact customer escalations through deep analysis of metadata, licensing, and data workflows.</li>
-        <li>Validated and automated cloud workflows across AWS, IBP, and HANA Cloud environments.</li>
-      </ul>
+    <div class="row-cards">
+      <div class="card">
+        <h3>SAP Analytics Cloud</h3>
+        <p class="meta">Developer Associate · 2023 – Present</p>
+        <p>
+          Full-stack development for enterprise analytics workflows, metadata systems,
+          customer-critical debugging, and sentiment-analysis-driven features.
+        </p>
+      </div>
     </div>
   </section>
 
   <!-- PROJECTS -->
-  <section>
+  <section class="row section-hidden" id="projects">
     <h2>Projects</h2>
 
-    <div class="card">
-      <h3>Guess IT! — Online Multiplayer Trivia</h3>
-      <p class="meta">Python · REST · React · NLP</p>
-      <ul>
-        <li>Built a cloud-hosted multiplayer trivia platform using scraped and NLP-processed datasets.</li>
-        <li>Applied keyword extraction and similarity matching for gameplay logic.</li>
-        <li>Published curated datasets on Kaggle with 200+ downloads.</li>
-      </ul>
-    </div>
+    <div class="row-cards scrollable">
 
-    <div class="card">
-      <h3>Blind Assistance System</h3>
-      <p class="meta">Computer Vision · Object Detection · Text-to-Speech</p>
-      <ul>
-        <li>Developed an object-detection–based vision system providing real-time audio feedback for visually impaired users.</li>
-      </ul>
-    </div>
+      <div class="card poster">
+        <img src="thumbnails/guessit.jpg" alt="Guess IT">
+        <h3>Guess IT! Trivia Platform</h3>
+        <p class="meta">Python · NLP · React</p>
+        <p>
+          Multiplayer trivia platform using NLP-processed datasets.
+          Kaggle datasets with 200+ downloads.
+        </p>
+      </div>
 
-    <div class="card">
-      <h3>Human Activity Recognition</h3>
-      <p class="meta">Machine Learning</p>
-      <ul>
-        <li>Built ML models to classify human activities from sensor data.</li>
-      </ul>
+      <div class="card poster">
+        <img src="thumbnails/blind.jpg" alt="Blind Assistance">
+        <h3>Blind Assistance System</h3>
+        <p class="meta">Computer Vision · Object Detection</p>
+        <p>
+          Real-time object detection with text-to-speech feedback for visually impaired users.
+        </p>
+      </div>
+
+      <div class="card poster">
+        <img src="thumbnails/har.jpg" alt="HAR">
+        <h3>Human Activity Recognition</h3>
+        <p class="meta">Machine Learning</p>
+        <p>
+          Activity classification models using sensor data.
+        </p>
+      </div>
+
+      <div class="card poster">
+        <img src="thumbnails/restaurant.jpg" alt="Restaurant Prediction">
+        <h3>Restaurant Success Prediction</h3>
+        <p class="meta">ML · Data Analysis</p>
+        <p>
+          Predictive modeling to estimate restaurant success using business features.
+        </p>
+      </div>
+
     </div>
   </section>
 
   <!-- RESUME -->
-  <section>
+  <section class="row section-hidden" id="resume">
     <h2>Resume</h2>
-    <iframe src="resume.pdf" title="Resume"></iframe>
+    <iframe src="resume.pdf"></iframe>
   </section>
 
   <!-- CONTACT -->
-  <section>
+  <section class="row section-hidden" id="contact">
     <h2>Contact</h2>
     <div class="card">
       <p>Email: <a href="mailto:pranee16502@gmail.com">pranee16502@gmail.com</a></p>
       <p>Location: Hyderabad, India</p>
+      <p>
+        <a href="https://github.com/praneeth16502" target="_blank">GitHub</a> ·
+        <a href="https://linkedin.com/in/praneeth-villuri" target="_blank">LinkedIn</a>
+      </p>
     </div>
   </section>
 
