@@ -1,3 +1,7 @@
+/* =========================
+   GLOBAL / RESET
+========================= */
+
 html {
   scroll-behavior: smooth;
 }
@@ -7,7 +11,7 @@ html {
   --fg: #ffffff;
   --muted: #b3b3b3;
   --card: #1f1f1f;
-  --accent: #e50914;
+  --accent: #e50914; /* Netflix red */
 }
 
 * {
@@ -19,9 +23,25 @@ body {
   background: var(--bg);
   color: var(--fg);
   font-family: 'Inter', Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
 }
 
-/* NAVBAR */
+/* Subtle cinematic grain */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
 .navbar {
   position: fixed;
   top: 0;
@@ -52,24 +72,45 @@ body {
   font-size: 0.95rem;
 }
 
-/* HERO */
+/* =========================
+   HERO (NETFLIX STYLE)
+========================= */
+
 .hero {
+  position: relative;
   height: 100vh;
   display: flex;
   align-items: center;
   padding: 0 60px;
   background:
-    linear-gradient(
-      to right,
-      rgba(20,20,20,0.95) 25%,
-      rgba(20,20,20,0.6),
-      rgba(20,20,20,0.2)
+    radial-gradient(
+      circle at 20% 30%,
+      rgba(229,9,20,0.25),
+      transparent 40%
     ),
-    url("banner.jpg") center/cover no-repeat;
+    linear-gradient(
+      to top,
+      rgba(20,20,20,1) 0%,
+      rgba(20,20,20,0.7) 40%,
+      rgba(20,20,20,0.2) 70%,
+      rgba(20,20,20,0.9) 100%
+    ),
+    url("banner.jpg") center / cover no-repeat;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 140px;
+  background: linear-gradient(to top, #141414, transparent);
 }
 
 .hero-content {
   max-width: 620px;
+  z-index: 1;
 }
 
 .hero h1 {
@@ -88,12 +129,17 @@ body {
   margin: 18px 0;
 }
 
-/* BUTTONS */
+/* =========================
+   BUTTONS
+========================= */
+
 .btn {
   padding: 10px 22px;
   border-radius: 4px;
   font-weight: 600;
   text-decoration: none;
+  letter-spacing: 0.02em;
+  display: inline-block;
 }
 
 .btn.primary {
@@ -106,7 +152,10 @@ body {
   color: white;
 }
 
-/* SECTIONS */
+/* =========================
+   SECTIONS
+========================= */
+
 .row {
   padding: 50px 40px;
 }
@@ -117,7 +166,19 @@ body {
   margin-bottom: 20px;
 }
 
-/* CARDS */
+.row h2::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 3px;
+  background: var(--accent);
+  margin-top: 8px;
+}
+
+/* =========================
+   ROWS & CARDS (NETFLIX TILES)
+========================= */
+
 .row-cards {
   display: flex;
   gap: 14px;
@@ -126,7 +187,7 @@ body {
 .scrollable {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  padding-bottom: 10px;
+  padding-bottom: 12px;
 }
 
 .card {
@@ -134,8 +195,9 @@ body {
   background: var(--card);
   padding: 16px;
   border-radius: 6px;
-  transition: transform 0.35s ease;
   scroll-snap-align: start;
+  transition: transform 0.35s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
 }
 
 .card:hover {
@@ -157,7 +219,10 @@ body {
   margin-bottom: 8px;
 }
 
-/* RESUME */
+/* =========================
+   RESUME
+========================= */
+
 iframe {
   width: 100%;
   height: 900px;
@@ -165,7 +230,10 @@ iframe {
   border-radius: 6px;
 }
 
-/* ANIMATIONS */
+/* =========================
+   SCROLL ANIMATIONS
+========================= */
+
 .section-hidden {
   opacity: 0;
   transform: translateY(40px);
@@ -177,7 +245,10 @@ iframe {
   transform: translateY(0);
 }
 
-/* RESPONSIVE */
+/* =========================
+   RESPONSIVE
+========================= */
+
 @media (max-width: 768px) {
   .hero {
     padding: 0 24px;
@@ -185,5 +256,9 @@ iframe {
 
   .hero h1 {
     font-size: 2.2rem;
+  }
+
+  .row {
+    padding: 40px 20px;
   }
 }
