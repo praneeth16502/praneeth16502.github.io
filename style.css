@@ -273,3 +273,84 @@ iframe {
     padding: 40px 20px;
   }
 }
+/* =========================
+   CONTACT SECTION (NETFLIX OUTRO)
+========================= */
+
+.contact {
+  position: relative;
+  padding: 90px 40px;
+  background:
+    radial-gradient(circle at 50% 20%, rgba(229,9,20,0.25), transparent 45%),
+    linear-gradient(to top, #000000, #141414);
+  text-align: center;
+}
+
+.contact h2 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.contact h2::after {
+  content: "";
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: var(--accent);
+  margin: 12px auto 0;
+}
+
+.contact p {
+  color: var(--muted);
+  max-width: 620px;
+  margin: 16px auto 40px;
+  font-size: 1rem;
+}
+
+/* Resume CTA */
+.contact-actions {
+  margin-bottom: 40px;
+}
+
+.resume-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+}
+
+/* Contact tiles */
+.contact-links {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.contact-links a {
+  padding: 14px 26px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 6px;
+  color: var(--fg);
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.contact-links a:hover {
+  transform: translateY(-4px);
+  background: rgba(229,9,20,0.85);
+}
+
+/* Fade-out ending */
+.contact::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, #000);
+}
+
