@@ -17,7 +17,7 @@ html {
 * {
   box-sizing: border-box;
 }
-
+background-position: center center;
 body {
   margin: 0;
   background: var(--bg);
