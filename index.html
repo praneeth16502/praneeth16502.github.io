@@ -1,824 +1,298 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Praneeth Villuri — AI/ML Engineer</title>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Praneeth Villuri | AI & Full Stack Engineer</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    :root {
-      --bg: #09090f;
-      --surface: #111118;
-      --border: #1e1e2e;
-      --accent: #7c6af7;
-      --accent2: #3de8b0;
-      --text: #e8e6f0;
-      --muted: #6b6880;
-      --card: #12121a;
-    }
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'media', // Uses system preference
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        background: '#ffffff',
+                        foreground: '#09090b',
+                        muted: '#f4f4f5',
+                        'muted-foreground': '#71717a',
+                        border: '#e4e4e7',
+                    }
+                }
+            }
+        }
+    </script>
 
-    html { scroll-behavior: smooth; }
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
+    <style>
+        /* Smooth fade-up animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-    /* ── NOISE TEXTURE ── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 9999;
-      opacity: .5;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.25rem 3rem;
-      background: rgba(9,9,15,.8);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .logo {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1.1rem;
-      letter-spacing: -.02em;
-      color: var(--text);
-      text-decoration: none;
-    }
-    .logo span { color: var(--accent); }
-
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-    .nav-links a {
-      font-family: 'DM Mono', monospace;
-      font-size: .8rem;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color .2s;
-      letter-spacing: .05em;
-    }
-    .nav-links a:hover { color: var(--accent2); }
-
-    /* ── HERO ── */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: 8rem 3rem 4rem;
-      max-width: 1100px;
-      margin: 0 auto;
-      position: relative;
-    }
-
-    .hero-content { max-width: 720px; }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-      background: rgba(124,106,247,.1);
-      border: 1px solid rgba(124,106,247,.25);
-      border-radius: 99px;
-      padding: .3rem .9rem;
-      font-family: 'DM Mono', monospace;
-      font-size: .75rem;
-      color: var(--accent);
-      margin-bottom: 1.75rem;
-      animation: fadeUp .6s ease both;
-    }
-    .badge::before {
-      content: '';
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--accent2);
-      box-shadow: 0 0 8px var(--accent2);
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%,100% { opacity:1; } 50% { opacity:.3; }
-    }
-
-    h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(3rem, 7vw, 5.5rem);
-      font-weight: 800;
-      line-height: 1.02;
-      letter-spacing: -.04em;
-      color: var(--text);
-      animation: fadeUp .6s .1s ease both;
-    }
-
-    h1 .highlight {
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero-sub {
-      margin: 1.5rem 0 2.5rem;
-      font-size: 1.1rem;
-      color: var(--muted);
-      max-width: 520px;
-      line-height: 1.7;
-      animation: fadeUp .6s .2s ease both;
-    }
-
-    .hero-cta {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      animation: fadeUp .6s .3s ease both;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-      padding: .75rem 1.6rem;
-      border-radius: 8px;
-      font-family: 'DM Mono', monospace;
-      font-size: .85rem;
-      font-weight: 500;
-      text-decoration: none;
-      transition: all .2s;
-      cursor: pointer;
-      border: none;
-    }
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
-    }
-    .btn-primary:hover {
-      background: #6a59e0;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(124,106,247,.35);
-    }
-    .btn-outline {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--muted);
-    }
-    .btn-outline:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      transform: translateY(-2px);
-    }
-
-    /* floating orbs */
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      pointer-events: none;
-    }
-    .orb-1 {
-      width: 400px; height: 400px;
-      background: rgba(124,106,247,.12);
-      top: 10%; right: -100px;
-      animation: float 8s ease-in-out infinite;
-    }
-    .orb-2 {
-      width: 250px; height: 250px;
-      background: rgba(61,232,176,.08);
-      bottom: 10%; right: 150px;
-      animation: float 6s 2s ease-in-out infinite;
-    }
-    @keyframes float {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
-    }
-
-    /* ── SECTION ── */
-    section {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 6rem 3rem;
-    }
-
-    .section-label {
-      font-family: 'DM Mono', monospace;
-      font-size: .75rem;
-      color: var(--accent);
-      letter-spacing: .15em;
-      text-transform: uppercase;
-      margin-bottom: .75rem;
-    }
-
-    h2 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      font-weight: 800;
-      letter-spacing: -.03em;
-      margin-bottom: 1rem;
-    }
-
-    .section-divider {
-      width: 100%;
-      height: 1px;
-      background: var(--border);
-      margin-bottom: 3.5rem;
-    }
-
-    /* ── EXPERIENCE ── */
-    .exp-item {
-      display: grid;
-      grid-template-columns: 200px 1fr;
-      gap: 2rem;
-      padding: 2rem 0;
-      border-bottom: 1px solid var(--border);
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity .5s, transform .5s;
-    }
-    .exp-item.visible { opacity: 1; transform: translateY(0); }
-
-    .exp-meta {
-      padding-top: .2rem;
-    }
-    .exp-period {
-      font-family: 'DM Mono', monospace;
-      font-size: .78rem;
-      color: var(--muted);
-    }
-    .exp-company {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 1rem;
-      color: var(--accent);
-      margin-top: .35rem;
-    }
-
-    .exp-title {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 1.25rem;
-      margin-bottom: .5rem;
-    }
-    .exp-desc { color: var(--muted); font-size: .95rem; line-height: 1.7; }
-
-    /* ── SKILLS ── */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 1.25rem;
-    }
-
-    .skill-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.5rem;
-      transition: border-color .2s, transform .2s;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity .5s, transform .5s, border-color .2s;
-    }
-    .skill-card.visible { opacity: 1; transform: translateY(0); }
-    .skill-card:hover { border-color: var(--accent); transform: translateY(-4px); }
-
-    .skill-cat {
-      font-family: 'DM Mono', monospace;
-      font-size: .72rem;
-      color: var(--accent2);
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      margin-bottom: .8rem;
-    }
-
-    .skill-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .5rem;
-    }
-    .tag {
-      background: rgba(255,255,255,.04);
-      border: 1px solid var(--border);
-      border-radius: 5px;
-      padding: .2rem .6rem;
-      font-family: 'DM Mono', monospace;
-      font-size: .75rem;
-      color: var(--text);
-    }
-
-    /* ── PROJECTS ── */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .project-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      overflow: hidden;
-      transition: border-color .2s, transform .2s, box-shadow .2s;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity .5s, transform .5s, border-color .2s, box-shadow .2s;
-      display: flex;
-      flex-direction: column;
-    }
-    .project-card.visible { opacity: 1; transform: translateY(0); }
-    .project-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-6px);
-      box-shadow: 0 20px 60px rgba(124,106,247,.12);
-    }
-
-    .project-header {
-      padding: 1.75rem 1.75rem 0;
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-
-    .project-icon {
-      width: 42px; height: 42px;
-      border-radius: 10px;
-      background: rgba(124,106,247,.15);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      flex-shrink: 0;
-    }
-
-    .project-links { display: flex; gap: .6rem; }
-    .project-link {
-      width: 32px; height: 32px;
-      border-radius: 8px;
-      background: rgba(255,255,255,.04);
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--muted);
-      text-decoration: none;
-      font-size: .85rem;
-      transition: color .2s, border-color .2s;
-    }
-    .project-link:hover { color: var(--accent); border-color: var(--accent); }
-
-    .project-body { padding: 1.25rem 1.75rem 1.75rem; flex: 1; display: flex; flex-direction: column; }
-    .project-name {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 1.1rem;
-      margin-bottom: .5rem;
-    }
-    .project-desc {
-      color: var(--muted);
-      font-size: .9rem;
-      line-height: 1.65;
-      flex: 1;
-      margin-bottom: 1.25rem;
-    }
-
-    .project-stack { display: flex; flex-wrap: wrap; gap: .4rem; }
-    .stack-tag {
-      background: rgba(61,232,176,.07);
-      border: 1px solid rgba(61,232,176,.2);
-      color: var(--accent2);
-      border-radius: 5px;
-      padding: .15rem .55rem;
-      font-family: 'DM Mono', monospace;
-      font-size: .72rem;
-    }
-
-    /* ── CONTACT ── */
-    .contact-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: start;
-    }
-
-    .contact-text h2 { margin-bottom: .75rem; }
-    .contact-text p { color: var(--muted); line-height: 1.7; margin-bottom: 2rem; }
-
-    .social-links { display: flex; flex-direction: column; gap: .75rem; }
-    .social-link {
-      display: flex;
-      align-items: center;
-      gap: .85rem;
-      color: var(--muted);
-      text-decoration: none;
-      font-family: 'DM Mono', monospace;
-      font-size: .85rem;
-      padding: .85rem 1.1rem;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      transition: all .2s;
-    }
-    .social-link:hover {
-      color: var(--text);
-      border-color: var(--accent);
-      background: rgba(124,106,247,.05);
-      transform: translateX(4px);
-    }
-    .social-icon {
-      width: 32px; height: 32px;
-      border-radius: 8px;
-      background: rgba(255,255,255,.05);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: .9rem;
-    }
-
-    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
-    .form-group { display: flex; flex-direction: column; gap: .4rem; }
-    .form-label {
-      font-family: 'DM Mono', monospace;
-      font-size: .75rem;
-      color: var(--muted);
-      letter-spacing: .06em;
-    }
-    .form-input, .form-textarea {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: .75rem 1rem;
-      color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      font-size: .95rem;
-      outline: none;
-      transition: border-color .2s;
-    }
-    .form-input:focus, .form-textarea:focus { border-color: var(--accent); }
-    .form-textarea { resize: vertical; min-height: 120px; }
-
-    /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2rem 3rem;
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      color: var(--muted);
-      font-family: 'DM Mono', monospace;
-      font-size: .78rem;
-    }
-
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ── SCROLLBAR ── */
-    ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      nav { padding: 1rem 1.5rem; }
-      .nav-links { gap: 1.5rem; }
-      .hero { padding: 6rem 1.5rem 3rem; }
-      section { padding: 4rem 1.5rem; }
-      .exp-item { grid-template-columns: 1fr; gap: .5rem; }
-      .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
-      footer { flex-direction: column; gap: .5rem; text-align: center; }
-    }
-  </style>
+        /* Subtle grain texture overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: 50;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background-color: #d4d4d8; border-radius: 20px; }
+    </style>
 </head>
-<body>
+<body class="bg-background text-foreground antialiased selection:bg-black selection:text-white">
 
-<!-- NAV -->
-<nav>
-  <a href="#" class="logo">PV<span>.</span></a>
-  <ul class="nav-links">
-    <li><a href="#experience">experience</a></li>
-    <li><a href="#skills">skills</a></li>
-    <li><a href="#projects">projects</a></li>
-    <li><a href="#contact">contact</a></li>
-  </ul>
-</nav>
+    <div class="max-w-5xl mx-auto px-6 py-24 md:py-32 relative z-10">
 
-<!-- HERO -->
-<div class="hero" style="position:relative;overflow:hidden;">
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="hero-content">
-    <div class="badge">Open to new opportunities</div>
-    <h1>Praneeth<br/><span class="highlight">Villuri</span></h1>
-    <p class="hero-sub">
-      AI / ML Engineer building intelligent systems — RAG pipelines, LLM applications, 
-      and scalable backend infrastructure that ships to production.
-    </p>
-    <div class="hero-cta">
-      <a href="#projects" class="btn btn-primary">View Projects ↓</a>
-      <a href="resume.pdf" class="btn btn-outline" target="_blank">Download Résumé</a>
-    </div>
-  </div>
-</div>
+        <header class="mb-32 space-y-8">
+            <div class="reveal">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/20">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                    </span>
+                    <span class="text-sm font-medium text-green-700">Open to opportunities</span>
+                </div>
+            </div>
 
-<!-- EXPERIENCE -->
-<section id="experience">
-  <p class="section-label">// 01 — experience</p>
-  <h2>Where I've Worked</h2>
-  <div class="section-divider"></div>
+            <div class="reveal" style="transition-delay: 100ms;">
+                <h1 class="text-6xl md:text-8xl font-bold tracking-tighter leading-[1.1]">
+                    Praneeth Villuri
+                </h1>
+            </div>
 
-  <div class="exp-item">
-    <div class="exp-meta">
-      <div class="exp-period">2023 – Present</div>
-      <div class="exp-company">SAP</div>
-    </div>
-    <div>
-      <div class="exp-title">Developer Associate — SAP Analytics Cloud</div>
-      <p class="exp-desc">
-        Full-stack development for enterprise analytics workflows and metadata systems. 
-        Built sentiment-analysis-driven features, handled customer-critical debugging, and contributed 
-        to production cloud systems used by thousands of enterprises worldwide.
-      </p>
-    </div>
-  </div>
-</section>
+            <div class="reveal" style="transition-delay: 200ms;">
+                <p class="text-xl md:text-3xl text-muted-foreground font-light leading-snug max-w-3xl">
+                    I engineer <span class="text-foreground font-medium">deterministic AI pipelines</span> and scalable systems for enterprise giants.
+                </p>
+                <p class="mt-6 text-lg text-muted-foreground/80 max-w-2xl leading-relaxed">
+                    Currently scaling backend architectures for <strong>2,000+ tenants at SAP</strong>. 
+                    Specialized in bringing order to chaotic data with React, Python, and RAG.
+                </p>
+            </div>
 
-<!-- SKILLS -->
-<section id="skills">
-  <p class="section-label">// 02 — skills</p>
-  <h2>Core Competencies</h2>
-  <div class="section-divider"></div>
+            <div class="reveal flex flex-wrap gap-4 pt-4" style="transition-delay: 300ms;">
+                <a href="PraneethVilluri-FullStack.pdf" target="_blank" class="flex items-center gap-2 bg-foreground text-white px-8 py-4 rounded-full font-medium hover:opacity-90 transition-all hover:scale-[1.02]">
+                    <i data-lucide="download" class="w-5 h-5"></i> Download Resume
+                </a>
+                <div class="flex gap-2">
+                    <a href="https://github.com/praneeth16502" target="_blank" class="p-4 rounded-full border border-border text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all">
+                        <i data-lucide="github" class="w-5 h-5"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/praneeth-villuri" target="_blank" class="p-4 rounded-full border border-border text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all">
+                        <i data-lucide="linkedin" class="w-5 h-5"></i>
+                    </a>
+                    <a href="mailto:pranee16502@gmail.com" class="p-4 rounded-full border border-border text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all">
+                        <i data-lucide="mail" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </header>
 
-  <div class="skills-grid">
-    <div class="skill-card">
-      <div class="skill-cat">AI / ML</div>
-      <div class="skill-tags">
-        <span class="tag">RAG</span>
-        <span class="tag">LLMs</span>
-        <span class="tag">Embeddings</span>
-        <span class="tag">Prompt Engineering</span>
-        <span class="tag">Evaluation</span>
-        <span class="tag">NLP</span>
-        <span class="tag">Computer Vision</span>
-      </div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-cat">Frameworks</div>
-      <div class="skill-tags">
-        <span class="tag">LangChain</span>
-        <span class="tag">LlamaIndex</span>
-        <span class="tag">Hugging Face</span>
-        <span class="tag">scikit-learn</span>
-        <span class="tag">TensorFlow</span>
-        <span class="tag">React</span>
-      </div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-cat">Backend</div>
-      <div class="skill-tags">
-        <span class="tag">Python</span>
-        <span class="tag">FastAPI</span>
-        <span class="tag">REST APIs</span>
-        <span class="tag">Node.js</span>
-        <span class="tag">TypeScript</span>
-      </div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-cat">Data & Infra</div>
-      <div class="skill-tags">
-        <span class="tag">PostgreSQL</span>
-        <span class="tag">FAISS</span>
-        <span class="tag">SQL</span>
-        <span class="tag">Pandas</span>
-        <span class="tag">Docker</span>
-        <span class="tag">CI/CD</span>
-        <span class="tag">Git</span>
-      </div>
-    </div>
-  </div>
-</section>
+        <section class="mb-32 reveal">
+            <h2 class="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-8">Technical Arsenal</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="p-6 border border-border rounded-3xl bg-muted/30 hover:bg-muted/60 transition-colors">
+                    <i data-lucide="code-2" class="w-8 h-8 mb-4 text-foreground"></i>
+                    <h3 class="font-bold mb-1">Frontend</h3>
+                    <p class="text-sm text-muted-foreground">React, Next.js, TS, Tailwind</p>
+                </div>
+                <div class="p-6 border border-border rounded-3xl bg-muted/30 hover:bg-muted/60 transition-colors">
+                    <i data-lucide="terminal" class="w-8 h-8 mb-4 text-foreground"></i>
+                    <h3 class="font-bold mb-1">Backend</h3>
+                    <p class="text-sm text-muted-foreground">Python, Node.js, FastAPI</p>
+                </div>
+                <div class="p-6 border border-border rounded-3xl bg-muted/30 hover:bg-muted/60 transition-colors">
+                    <i data-lucide="database" class="w-8 h-8 mb-4 text-foreground"></i>
+                    <h3 class="font-bold mb-1">Data</h3>
+                    <p class="text-sm text-muted-foreground">PostgreSQL, HANA, Docker</p>
+                </div>
+                <div class="p-6 border border-border rounded-3xl bg-muted/30 hover:bg-muted/60 transition-colors">
+                    <i data-lucide="brain-circuit" class="w-8 h-8 mb-4 text-foreground"></i>
+                    <h3 class="font-bold mb-1">AI Engineering</h3>
+                    <p class="text-sm text-muted-foreground">RAG, LangChain, FAISS</p>
+                </div>
+            </div>
+        </section>
 
-<!-- PROJECTS -->
-<section id="projects">
-  <p class="section-label">// 03 — projects</p>
-  <h2>Things I've Built</h2>
-  <div class="section-divider"></div>
+        <section class="mb-32 reveal">
+            <h2 class="text-3xl font-bold mb-12">Experience</h2>
+            <div class="space-y-12">
+                
+                <div class="group relative border-l-2 border-border pl-8 hover:border-foreground transition-colors duration-300">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-background border-2 border-border group-hover:border-foreground transition-colors"></div>
+                    <div class="flex flex-col sm:flex-row sm:items-baseline justify-between mb-2">
+                        <h3 class="text-xl font-bold">Developer Associate (Full Stack)</h3>
+                        <span class="text-sm text-muted-foreground font-mono">July 2023 — Present</span>
+                    </div>
+                    <div class="text-lg font-medium text-muted-foreground mb-4">SAP Labs India</div>
+                    <p class="text-muted-foreground leading-relaxed max-w-2xl mb-4">
+                        Architecting scalable web architectures for 2,000+ enterprise tenants. Specialized in React, TypeScript, and integrating deterministic AI-driven workflows into production environments.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-muted text-xs font-medium rounded-full text-muted-foreground">React</span>
+                        <span class="px-3 py-1 bg-muted text-xs font-medium rounded-full text-muted-foreground">TypeScript</span>
+                        <span class="px-3 py-1 bg-muted text-xs font-medium rounded-full text-muted-foreground">FastAPI</span>
+                    </div>
+                </div>
 
-  <div class="projects-grid">
+                <div class="group relative border-l-2 border-border pl-8 hover:border-foreground transition-colors duration-300">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-background border-2 border-border group-hover:border-foreground transition-colors"></div>
+                    <div class="flex flex-col sm:flex-row sm:items-baseline justify-between mb-2">
+                        <h3 class="text-xl font-bold">Scholar Intern</h3>
+                        <span class="text-sm text-muted-foreground font-mono">Feb 2023 — July 2023</span>
+                    </div>
+                    <div class="text-lg font-medium text-muted-foreground mb-4">SAP Labs</div>
+                    <p class="text-muted-foreground leading-relaxed max-w-2xl mb-4">
+                        Developed 'Insight Agent', an autonomous AI pipeline translating unstructured user inputs into strict database schemas using RAG and LangChain.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-muted text-xs font-medium rounded-full text-muted-foreground">Python</span>
+                        <span class="px-3 py-1 bg-muted text-xs font-medium rounded-full text-muted-foreground">LangChain</span>
+                        <span class="px-3 py-1 bg-muted text-xs font-medium rounded-full text-muted-foreground">AI Agents</span>
+                    </div>
+                </div>
 
-    <div class="project-card">
-      <div class="project-header">
-        <div class="project-icon">🧠</div>
-        <div class="project-links">
-          <a href="https://github.com/praneeth16502/InsightAI-agent" class="project-link" target="_blank" title="GitHub">⌥</a>
-        </div>
-      </div>
-      <div class="project-body">
-        <div class="project-name">InsightAI Agent</div>
-        <p class="project-desc">
-          An intelligent AI agent capable of reasoning, retrieving, and acting on complex queries. 
-          Built with agentic patterns for real-world problem solving.
-        </p>
-        <div class="project-stack">
-          <span class="stack-tag">Python</span>
-          <span class="stack-tag">LangChain</span>
-          <span class="stack-tag">LLM</span>
-          <span class="stack-tag">Agents</span>
-        </div>
-      </div>
-    </div>
+            </div>
+        </section>
 
-    <div class="project-card">
-      <div class="project-header">
-        <div class="project-icon">🔍</div>
-        <div class="project-links">
-          <a href="https://github.com/praneeth16502/rag-knowledge-assistant" class="project-link" target="_blank" title="GitHub">⌥</a>
-        </div>
-      </div>
-      <div class="project-body">
-        <div class="project-name">RAG Knowledge Assistant</div>
-        <p class="project-desc">
-          Retrieval-Augmented Generation system with evaluation and grounding. 
-          Architected to minimize hallucinations and improve factual accuracy at scale.
-        </p>
-        <div class="project-stack">
-          <span class="stack-tag">Python</span>
-          <span class="stack-tag">RAG</span>
-          <span class="stack-tag">FAISS</span>
-          <span class="stack-tag">Embeddings</span>
-        </div>
-      </div>
-    </div>
+        <section class="mb-32 reveal">
+            <h2 class="text-3xl font-bold mb-12">Selected Work</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <a href="https://github.com/praneeth16502/InsightAI-agent" target="_blank" class="group block h-full">
+                    <div class="p-8 border border-border rounded-3xl h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-white">
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="p-3 bg-muted rounded-2xl group-hover:bg-foreground group-hover:text-white transition-colors">
+                                <i data-lucide="bot" class="w-6 h-6"></i>
+                            </div>
+                            <i data-lucide="arrow-up-right" class="text-muted-foreground group-hover:text-foreground transition-colors"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3">Insight Agent</h3>
+                        <p class="text-muted-foreground mb-6 leading-relaxed">
+                            An autonomous AI pipeline (RAG, NL2SQL) that translates unstructured inputs into strict database schemas. Improved query success from 60% to 95%.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="text-xs font-medium text-muted-foreground border border-border px-2 py-1 rounded-md">Python</span>
+                            <span class="text-xs font-medium text-muted-foreground border border-border px-2 py-1 rounded-md">LangChain</span>
+                        </div>
+                    </div>
+                </a>
 
-    <div class="project-card">
-      <div class="project-header">
-        <div class="project-icon">⚡</div>
-        <div class="project-links">
-          <a href="https://github.com/praneeth16502/event-driven-notification-system" class="project-link" target="_blank" title="GitHub">⌥</a>
-        </div>
-      </div>
-      <div class="project-body">
-        <div class="project-name">Event-Driven Notification System</div>
-        <p class="project-desc">
-          Scalable backend notification pipeline built with event-driven architecture. 
-          Designed for reliability and high throughput in production environments.
-        </p>
-        <div class="project-stack">
-          <span class="stack-tag">TypeScript</span>
-          <span class="stack-tag">Node.js</span>
-          <span class="stack-tag">Event-Driven</span>
-        </div>
-      </div>
-    </div>
+                <a href="#" class="group block h-full">
+                    <div class="p-8 border border-border rounded-3xl h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-white">
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="p-3 bg-muted rounded-2xl group-hover:bg-foreground group-hover:text-white transition-colors">
+                                <i data-lucide="layout-template" class="w-6 h-6"></i>
+                            </div>
+                            <i data-lucide="arrow-up-right" class="text-muted-foreground group-hover:text-foreground transition-colors"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3">SAP Lightweight View</h3>
+                        <p class="text-muted-foreground mb-6 leading-relaxed">
+                            Optimized data-flow patterns to support high-throughput enterprise environments with 99.9% View Mode stability for 2,000+ tenants.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="text-xs font-medium text-muted-foreground border border-border px-2 py-1 rounded-md">React</span>
+                            <span class="text-xs font-medium text-muted-foreground border border-border px-2 py-1 rounded-md">Performance</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="https://github.com/ucantfindme/FYP" target="_blank" class="group block h-full">
+                    <div class="p-8 border border-border rounded-3xl h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-white">
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="p-3 bg-muted rounded-2xl group-hover:bg-foreground group-hover:text-white transition-colors">
+                                <i data-lucide="gamepad-2" class="w-6 h-6"></i>
+                            </div>
+                            <i data-lucide="arrow-up-right" class="text-muted-foreground group-hover:text-foreground transition-colors"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3">Guess IT! Trivia</h3>
+                        <p class="text-muted-foreground mb-6 leading-relaxed">
+                             Online multiplayer trivia platform powered by NLP-processed Kaggle datasets. Real-time multiplayer mechanics.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="text-xs font-medium text-muted-foreground border border-border px-2 py-1 rounded-md">React</span>
+                            <span class="text-xs font-medium text-muted-foreground border border-border px-2 py-1 rounded-md">NLP</span>
+                        </div>
+                    </div>
+                </a>
 
-    <div class="project-card">
-      <div class="project-header">
-        <div class="project-icon">🎯</div>
-        <div class="project-links">
-          <a href="https://github.com/ucantfindme/FYP" class="project-link" target="_blank" title="GitHub">⌥</a>
-        </div>
-      </div>
-      <div class="project-body">
-        <div class="project-name">Guess IT! Trivia Platform</div>
-        <p class="project-desc">
-          Online multiplayer trivia platform powered by NLP-processed Kaggle datasets. 
-          Dataset achieved 200+ downloads. Real-time multiplayer game mechanics.
-        </p>
-        <div class="project-stack">
-          <span class="stack-tag">Python</span>
-          <span class="stack-tag">NLP</span>
-          <span class="stack-tag">React</span>
-          <span class="stack-tag">HTML</span>
-        </div>
-      </div>
-    </div>
+                 <a href="https://github.com/praneeth16502/Blind-Assistance-System" target="_blank" class="group block h-full">
+                    <div class="p-8 border border-border rounded-3xl h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-white">
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="p-3 bg-muted rounded-2xl group-hover:bg-foreground group-hover:text-white transition-colors">
+                                <i data-lucide="eye" class="w-6 h-6"></i>
+                            </div>
+                            <i data-lucide="arrow-up-right" class="text-muted-foreground group-hover:text-foreground transition-colors"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3">Blind Assistance System</h3>
+                        <p class="text-muted-foreground mb-6 leading-relaxed">
+                            Real-time object detection system with text-to-speech feedback, built to assist visually impaired users navigate independently.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="text-xs font-medium text-muted-foreground border border-border px-2 py-1 rounded-md">Python</span>
+                            <span class="text-xs font-medium text-muted-foreground border border-border px-2 py-1 rounded-md">CV</span>
+                        </div>
+                    </div>
+                </a>
 
-    <div class="project-card">
-      <div class="project-header">
-        <div class="project-icon">👁️</div>
-        <div class="project-links">
-          <a href="https://github.com/praneeth16502/Blind-Assistance-System" class="project-link" target="_blank" title="GitHub">⌥</a>
-        </div>
-      </div>
-      <div class="project-body">
-        <div class="project-name">Blind Assistance System</div>
-        <p class="project-desc">
-          Real-time object detection system with text-to-speech feedback, built to assist visually impaired users 
-          navigate their environment independently using computer vision.
-        </p>
-        <div class="project-stack">
-          <span class="stack-tag">Computer Vision</span>
-          <span class="stack-tag">Object Detection</span>
-          <span class="stack-tag">Python</span>
-          <span class="stack-tag">TTS</span>
-        </div>
-      </div>
+            </div>
+        </section>
+
+        <footer class="border-t border-border pt-12 pb-12 flex flex-col md:flex-row justify-between items-center gap-6 reveal">
+            <div class="text-muted-foreground">
+                © 2026 Praneeth Villuri.
+            </div>
+            <div class="flex gap-6">
+                <a href="https://linkedin.com/in/praneeth-villuri" class="text-muted-foreground hover:text-foreground transition-colors">LinkedIn</a>
+                <a href="https://github.com/praneeth16502" class="text-muted-foreground hover:text-foreground transition-colors">GitHub</a>
+                <a href="mailto:pranee16502@gmail.com" class="text-muted-foreground hover:text-foreground transition-colors">Email</a>
+            </div>
+        </footer>
+
     </div>
 
-    <div class="project-card">
-      <div class="project-header">
-        <div class="project-icon">📊</div>
-        <div class="project-links">
-          <a href="https://github.com/praneeth16502" class="project-link" target="_blank" title="GitHub">⌥</a>
-        </div>
-      </div>
-      <div class="project-body">
-        <div class="project-name">Human Activity Recognition</div>
-        <p class="project-desc">
-          ML classification system using sensor data to identify and categorize 
-          human activities with high accuracy across multiple activity classes.
-        </p>
-        <div class="project-stack">
-          <span class="stack-tag">Machine Learning</span>
-          <span class="stack-tag">scikit-learn</span>
-          <span class="stack-tag">Pandas</span>
-        </div>
-      </div>
-    </div>
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
 
-  </div>
-</section>
+        // Simple Scroll Animation Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Only animate once
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
 
-<!-- CONTACT -->
-<section id="contact">
-  <div class="contact-inner">
-    <div class="contact-text">
-      <p class="section-label">// 04 — contact</p>
-      <h2>Let's Build<br/>Something.</h2>
-      <p>
-        I'm open to AI/ML engineering roles, interesting side projects, 
-        and collaborations with people building things that matter.
-      </p>
-      <div class="social-links">
-        <a href="mailto:pranee16502@gmail.com" class="social-link">
-          <div class="social-icon">✉</div>
-          pranee16502@gmail.com
-        </a>
-        <a href="https://linkedin.com/in/praneeth-villuri" class="social-link" target="_blank">
-          <div class="social-icon">in</div>
-          linkedin.com/in/praneeth-villuri
-        </a>
-        <a href="https://github.com/praneeth16502" class="social-link" target="_blank">
-          <div class="social-icon">⌥</div>
-          github.com/praneeth16502
-        </a>
-      </div>
-    </div>
-    <div>
-      <div class="contact-form">
-        <div class="form-group">
-          <label class="form-label">NAME</label>
-          <input type="text" class="form-input" placeholder="Your name"/>
-        </div>
-        <div class="form-group">
-          <label class="form-label">EMAIL</label>
-          <input type="email" class="form-input" placeholder="your@email.com"/>
-        </div>
-        <div class="form-group">
-          <label class="form-label">MESSAGE</label>
-          <textarea class="form-textarea" placeholder="Tell me about your project or opportunity..."></textarea>
-        </div>
-        <a href="mailto:pranee16502@gmail.com" class="btn btn-primary" style="justify-content:center;">Send Message →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <span>© 2026 Praneeth Villuri</span>
-  <span>Built with care. No frameworks harmed.</span>
-</footer>
-
-<script>
-  // Intersection Observer for scroll animations
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 80);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.exp-item, .skill-card, .project-card').forEach(el => observer.observe(el));
-</script>
-
+        document.querySelectorAll('.reveal').forEach((el) => {
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
