@@ -3,28 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Praneeth Villuri | AI & Full Stack Engineer</title>
+    <title>Praneeth Villuri | Full Stack & AI Engineer</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <script src="https://cdn.tailwindcss.com"></script>
     
     <script>
         tailwind.config = {
-            darkMode: 'media', // Uses system preference
             theme: {
                 extend: {
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
+                        mono: ['monospace'], // For that code feel
                     },
                     colors: {
-                        background: '#ffffff',
-                        foreground: '#09090b',
-                        muted: '#f4f4f5',
-                        'muted-foreground': '#71717a',
-                        border: '#e4e4e7',
+                        background: '#050505', // Very dark bg
+                        surface: '#121212',    // Card bg
+                        foreground: '#ffffff', // Text
+                        muted: '#a1a1aa',      // Secondary text
+                        border: '#27272a',     // Dark borders
+                        accent: '#ffffff',     // White accents
                     }
                 }
             }
@@ -34,10 +35,25 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
-        /* Smooth fade-up animation */
+        body {
+            background-color: #050505;
+            color: #ffffff;
+        }
+
+        /* The Grid Pattern from the image */
+        .bg-grid {
+            background-size: 50px 50px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+        }
+
+        /* Smooth Reveal Animation */
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(20px);
             transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
         }
         .reveal.active {
@@ -45,215 +61,251 @@
             transform: translateY(0);
         }
 
-        /* Subtle grain texture overlay */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
-            opacity: 0.4;
-            pointer-events: none;
-            z-index: 50;
-        }
-        
-        /* Custom scrollbar */
+        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background-color: #d4d4d8; border-radius: 20px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background-color: #333; border-radius: 4px; }
     </style>
 </head>
-<body class="bg-background text-foreground antialiased selection:bg-black selection:text-white">
+<body class="antialiased selection:bg-white selection:text-black">
 
-    <div class="max-w-5xl mx-auto px-6 py-24 md:py-32 relative z-10">
+    <div class="fixed inset-0 bg-grid pointer-events-none z-0"></div>
 
-        <header class="mb-32 space-y-8">
-            <div class="reveal">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/20">
-                    <span class="relative flex h-2 w-2">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                    </span>
-                    <span class="text-sm font-medium text-green-700">Open to opportunities</span>
+    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 animate-[fadeIn_1s_ease-out]">
+        <div class="flex items-center gap-1 bg-[#1a1a1a]/80 backdrop-blur-md px-2 py-2 rounded-full border border-white/10 shadow-2xl">
+            <a href="#" class="px-4 py-2 text-xs font-medium text-white hover:bg-white/10 rounded-full transition-colors">Home</a>
+            <a href="#experience" class="px-4 py-2 text-xs font-medium text-muted hover:text-white hover:bg-white/10 rounded-full transition-colors">Experience</a>
+            <a href="#skills" class="px-4 py-2 text-xs font-medium text-muted hover:text-white hover:bg-white/10 rounded-full transition-colors">Skills</a>
+            <a href="#projects" class="px-4 py-2 text-xs font-medium text-muted hover:text-white hover:bg-white/10 rounded-full transition-colors">Projects</a>
+            <a href="mailto:pranee16502@gmail.com" class="px-4 py-2 text-xs font-medium text-muted hover:text-white hover:bg-white/10 rounded-full transition-colors">Contact</a>
+        </div>
+    </nav>
+
+    <div class="relative z-10 max-w-6xl mx-auto px-6">
+
+        <section class="min-h-screen flex flex-col justify-center pt-32 pb-20">
+            
+            <div class="reveal text-center mb-4">
+                <span class="text-muted text-sm tracking-widest uppercase border-b border-white/10 pb-1">Praneeth Villuri</span>
+            </div>
+
+            <div class="reveal relative font-black tracking-tighter leading-none mb-16">
+                <div class="flex flex-col md:flex-row items-start justify-between gap-8 md:gap-0">
+                    <h1 class="text-[13vw] md:text-[8rem] text-white">Full-stack</h1>
+                    
+                    <div class="mt-4 md:mt-8">
+                        <a href="PraneethVilluri-FullStack.pdf" target="_blank" class="group flex items-center gap-2 px-6 py-3 rounded-full border border-white/20 hover:bg-white hover:text-black transition-all duration-300">
+                            <span class="text-sm font-medium">Download CV</span>
+                            <i data-lucide="arrow-down" class="w-4 h-4 group-hover:animate-bounce"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-full md:max-w-lg mt-8 md:mt-0 z-10">
+                    <p class="text-muted text-lg md:text-xl font-normal leading-relaxed text-left md:text-center">
+                        I specialize in architecting <span class="text-white italic">deterministic AI pipelines</span>, <span class="text-white italic">scalable backends</span>, and <span class="text-white italic">responsive frontends</span> for enterprise giants.
+                    </p>
+                </div>
+
+                <div class="flex justify-end mt-4 md:-mt-8">
+                    <h1 class="text-[13vw] md:text-[8rem] text-white text-right">Engineer</h1>
                 </div>
             </div>
 
-            <div class="reveal" style="transition-delay: 100ms;">
-                <h1 class="text-6xl md:text-8xl font-bold tracking-tighter leading-[1.1]">
-                    Praneeth Villuri
-                </h1>
-            </div>
+            <div class="reveal grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+                <div class="group p-6 rounded-2xl border border-white/10 bg-[#0f0f0f] hover:border-white/30 transition-all duration-300 cursor-default">
+                    <h3 class="text-xl font-bold text-white mb-1">Who I am</h3>
+                    <p class="text-sm text-muted font-medium mb-4">About</p>
+                    <p class="text-xs text-muted/60">Full Stack Engineer at SAP Labs. Tech enthusiast & builder.</p>
+                </div>
 
-            <div class="reveal" style="transition-delay: 200ms;">
-                <p class="text-xl md:text-3xl text-muted-foreground font-light leading-snug max-w-3xl">
-                    I engineer <span class="text-foreground font-medium">deterministic AI pipelines</span> and scalable systems for enterprise giants.
-                </p>
-                <p class="mt-6 text-lg text-muted-foreground/80 max-w-2xl leading-relaxed">
-                    Currently scaling backend architectures for <strong>2,000+ tenants at SAP</strong>. 
-                    Specialized in bringing order to chaotic data with React, Python, and RAG.
-                </p>
-            </div>
-
-            <div class="reveal flex flex-wrap gap-4 pt-4" style="transition-delay: 300ms;">
-                <a href="PraneethVilluri-FullStack.pdf" target="_blank" class="flex items-center gap-2 bg-foreground text-white px-8 py-4 rounded-full font-medium hover:opacity-90 transition-all hover:scale-[1.02]">
-                    <i data-lucide="download" class="w-5 h-5"></i> Download Resume
+                <a href="#experience" class="group p-6 rounded-2xl border border-white/10 bg-[#0f0f0f] hover:border-white/30 transition-all duration-300">
+                    <h3 class="text-xl font-bold text-white mb-1">What I do</h3>
+                    <p class="text-sm text-muted font-medium mb-4">Experience</p>
+                    <p class="text-xs text-muted/60">Building at scale for 2,000+ enterprise tenants.</p>
+                    <div class="mt-4 flex justify-end opacity-0 group-hover:opacity-100 transition-opacity">
+                        <i data-lucide="arrow-right" class="w-4 h-4 text-white"></i>
+                    </div>
                 </a>
-                <div class="flex gap-2">
-                    <a href="https://github.com/praneeth16502" target="_blank" class="p-4 rounded-full border border-border text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all">
-                        <i data-lucide="github" class="w-5 h-5"></i>
-                    </a>
-                    <a href="https://linkedin.com/in/praneeth-villuri" target="_blank" class="p-4 rounded-full border border-border text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all">
-                        <i data-lucide="linkedin" class="w-5 h-5"></i>
-                    </a>
-                    <a href="mailto:pranee16502@gmail.com" class="p-4 rounded-full border border-border text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all">
-                        <i data-lucide="mail" class="w-5 h-5"></i>
-                    </a>
-                </div>
-            </div>
-        </header>
 
-        <section class="mb-32 reveal">
-            <h2 class="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-8">Technical Arsenal</h2>
+                <a href="#skills" class="group p-6 rounded-2xl border border-white/10 bg-[#0f0f0f] hover:border-white/30 transition-all duration-300">
+                    <h3 class="text-xl font-bold text-white mb-1">How I work</h3>
+                    <p class="text-sm text-muted font-medium mb-4">Skills</p>
+                    <p class="text-xs text-muted/60">React, Python, RAG, Docker & TypeScript.</p>
+                    <div class="mt-4 flex justify-end opacity-0 group-hover:opacity-100 transition-opacity">
+                        <i data-lucide="arrow-right" class="w-4 h-4 text-white"></i>
+                    </div>
+                </a>
+
+                <a href="#projects" class="group p-6 rounded-2xl border border-white/10 bg-[#0f0f0f] hover:border-white/30 transition-all duration-300">
+                    <h3 class="text-xl font-bold text-white mb-1">What I built</h3>
+                    <p class="text-sm text-muted font-medium mb-4">Projects</p>
+                    <p class="text-xs text-muted/60">Insight Agent, SAP View Mode & Gitlytics.</p>
+                    <div class="mt-4 flex justify-end opacity-0 group-hover:opacity-100 transition-opacity">
+                        <i data-lucide="arrow-right" class="w-4 h-4 text-white"></i>
+                    </div>
+                </a>
+            </div>
+
+            <div class="reveal flex justify-center gap-4 mt-16">
+                <a href="https://github.com/praneeth16502" target="_blank" class="p-3 rounded-full border border-white/10 text-muted hover:text-white hover:bg-white/10 transition-all hover:scale-110">
+                    <i data-lucide="github" class="w-5 h-5"></i>
+                </a>
+                <a href="https://linkedin.com/in/praneeth-villuri" target="_blank" class="p-3 rounded-full border border-white/10 text-muted hover:text-white hover:bg-white/10 transition-all hover:scale-110">
+                    <i data-lucide="linkedin" class="w-5 h-5"></i>
+                </a>
+                <a href="mailto:pranee16502@gmail.com" class="p-3 rounded-full border border-white/10 text-muted hover:text-white hover:bg-white/10 transition-all hover:scale-110">
+                    <i data-lucide="mail" class="w-5 h-5"></i>
+                </a>
+            </div>
+        </section>
+
+        <section id="skills" class="mb-32 reveal pt-12">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="h-[1px] bg-white/10 flex-1"></div>
+                <h2 class="text-sm font-medium text-muted uppercase tracking-wider">Technical Arsenal</h2>
+                <div class="h-[1px] bg-white/10 flex-1"></div>
+            </div>
+            
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div class="p-6 border border-border rounded-3xl bg-muted/30 hover:bg-muted/60 transition-colors">
-                    <i data-lucide="code-2" class="w-8 h-8 mb-4 text-foreground"></i>
-                    <h3 class="font-bold mb-1">Frontend</h3>
-                    <p class="text-sm text-muted-foreground">React, Next.js, TS, Tailwind</p>
+                <div class="p-6 border border-white/10 rounded-3xl bg-[#0f0f0f] hover:bg-white/5 transition-colors">
+                    <i data-lucide="code-2" class="w-8 h-8 mb-4 text-white"></i>
+                    <h3 class="font-bold mb-1 text-white">Frontend</h3>
+                    <p class="text-sm text-muted">React, Next.js, TS, Tailwind</p>
                 </div>
-                <div class="p-6 border border-border rounded-3xl bg-muted/30 hover:bg-muted/60 transition-colors">
-                    <i data-lucide="terminal" class="w-8 h-8 mb-4 text-foreground"></i>
-                    <h3 class="font-bold mb-1">Backend</h3>
-                    <p class="text-sm text-muted-foreground">Python, Node.js, FastAPI</p>
+                <div class="p-6 border border-white/10 rounded-3xl bg-[#0f0f0f] hover:bg-white/5 transition-colors">
+                    <i data-lucide="terminal" class="w-8 h-8 mb-4 text-white"></i>
+                    <h3 class="font-bold mb-1 text-white">Backend</h3>
+                    <p class="text-sm text-muted">Python, Node.js, FastAPI</p>
                 </div>
-                <div class="p-6 border border-border rounded-3xl bg-muted/30 hover:bg-muted/60 transition-colors">
-                    <i data-lucide="database" class="w-8 h-8 mb-4 text-foreground"></i>
-                    <h3 class="font-bold mb-1">Data</h3>
-                    <p class="text-sm text-muted-foreground">PostgreSQL, HANA, Docker</p>
+                <div class="p-6 border border-white/10 rounded-3xl bg-[#0f0f0f] hover:bg-white/5 transition-colors">
+                    <i data-lucide="database" class="w-8 h-8 mb-4 text-white"></i>
+                    <h3 class="font-bold mb-1 text-white">Data</h3>
+                    <p class="text-sm text-muted">PostgreSQL, HANA, Docker</p>
                 </div>
-                <div class="p-6 border border-border rounded-3xl bg-muted/30 hover:bg-muted/60 transition-colors">
-                    <i data-lucide="brain-circuit" class="w-8 h-8 mb-4 text-foreground"></i>
-                    <h3 class="font-bold mb-1">AI Engineering</h3>
-                    <p class="text-sm text-muted-foreground">RAG, LangChain, FAISS</p>
+                <div class="p-6 border border-white/10 rounded-3xl bg-[#0f0f0f] hover:bg-white/5 transition-colors">
+                    <i data-lucide="brain-circuit" class="w-8 h-8 mb-4 text-white"></i>
+                    <h3 class="font-bold mb-1 text-white">AI Engineering</h3>
+                    <p class="text-sm text-muted">RAG, LangChain, FAISS</p>
                 </div>
             </div>
         </section>
 
-        <section class="mb-32 reveal">
-            <h2 class="text-3xl font-bold mb-12">Experience</h2>
-            <div class="space-y-12">
+        <section id="experience" class="mb-32 reveal pt-12">
+            <h2 class="text-4xl font-bold mb-12 text-white">Experience</h2>
+            <div class="space-y-6">
                 
-                <div class="group relative border-l-2 border-border pl-8 hover:border-foreground transition-colors duration-300">
-                    <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-background border-2 border-border group-hover:border-foreground transition-colors"></div>
-                    <div class="flex flex-col sm:flex-row sm:items-baseline justify-between mb-2">
-                        <h3 class="text-xl font-bold">Developer Associate (Full Stack)</h3>
-                        <span class="text-sm text-muted-foreground font-mono">July 2023 — Present</span>
+                <div class="group relative border border-white/10 bg-[#0f0f0f] p-8 rounded-3xl hover:border-white/30 transition-all duration-300">
+                    <div class="flex flex-col sm:flex-row sm:items-baseline justify-between mb-4">
+                        <h3 class="text-2xl font-bold text-white">Developer Associate (Full Stack)</h3>
+                        <span class="text-sm text-muted font-mono bg-white/5 px-3 py-1 rounded-full">July 2023 — Present</span>
                     </div>
-                    <div class="text-lg font-medium text-muted-foreground mb-4">SAP Labs India</div>
-                    <p class="text-muted-foreground leading-relaxed max-w-2xl mb-4">
+                    <div class="text-lg font-medium text-white mb-4">SAP Labs India</div>
+                    <p class="text-muted leading-relaxed max-w-3xl mb-6">
                         Architecting scalable web architectures for 2,000+ enterprise tenants. Specialized in React, TypeScript, and integrating deterministic AI-driven workflows into production environments.
                     </p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-muted text-xs font-medium rounded-full text-muted-foreground">React</span>
-                        <span class="px-3 py-1 bg-muted text-xs font-medium rounded-full text-muted-foreground">TypeScript</span>
-                        <span class="px-3 py-1 bg-muted text-xs font-medium rounded-full text-muted-foreground">FastAPI</span>
+                        <span class="px-3 py-1 bg-white/5 border border-white/10 text-xs font-medium rounded-full text-muted">React</span>
+                        <span class="px-3 py-1 bg-white/5 border border-white/10 text-xs font-medium rounded-full text-muted">TypeScript</span>
+                        <span class="px-3 py-1 bg-white/5 border border-white/10 text-xs font-medium rounded-full text-muted">FastAPI</span>
                     </div>
                 </div>
 
-                <div class="group relative border-l-2 border-border pl-8 hover:border-foreground transition-colors duration-300">
-                    <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-background border-2 border-border group-hover:border-foreground transition-colors"></div>
-                    <div class="flex flex-col sm:flex-row sm:items-baseline justify-between mb-2">
-                        <h3 class="text-xl font-bold">Scholar Intern</h3>
-                        <span class="text-sm text-muted-foreground font-mono">Feb 2023 — July 2023</span>
+                <div class="group relative border border-white/10 bg-[#0f0f0f] p-8 rounded-3xl hover:border-white/30 transition-all duration-300">
+                    <div class="flex flex-col sm:flex-row sm:items-baseline justify-between mb-4">
+                        <h3 class="text-2xl font-bold text-white">Scholar Intern</h3>
+                        <span class="text-sm text-muted font-mono bg-white/5 px-3 py-1 rounded-full">Feb 2023 — July 2023</span>
                     </div>
-                    <div class="text-lg font-medium text-muted-foreground mb-4">SAP Labs</div>
-                    <p class="text-muted-foreground leading-relaxed max-w-2xl mb-4">
+                    <div class="text-lg font-medium text-white mb-4">SAP Labs</div>
+                    <p class="text-muted leading-relaxed max-w-3xl mb-6">
                         Developed 'Insight Agent', an autonomous AI pipeline translating unstructured user inputs into strict database schemas using RAG and LangChain.
                     </p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-muted text-xs font-medium rounded-full text-muted-foreground">Python</span>
-                        <span class="px-3 py-1 bg-muted text-xs font-medium rounded-full text-muted-foreground">LangChain</span>
-                        <span class="px-3 py-1 bg-muted text-xs font-medium rounded-full text-muted-foreground">AI Agents</span>
+                        <span class="px-3 py-1 bg-white/5 border border-white/10 text-xs font-medium rounded-full text-muted">Python</span>
+                        <span class="px-3 py-1 bg-white/5 border border-white/10 text-xs font-medium rounded-full text-muted">LangChain</span>
+                        <span class="px-3 py-1 bg-white/5 border border-white/10 text-xs font-medium rounded-full text-muted">AI Agents</span>
                     </div>
                 </div>
 
             </div>
         </section>
 
-        <section class="mb-32 reveal">
-            <h2 class="text-3xl font-bold mb-12">Selected Work</h2>
+        <section id="projects" class="mb-32 reveal pt-12">
+            <h2 class="text-4xl font-bold mb-12 text-white">Selected Work</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 
                 <a href="https://github.com/praneeth16502/InsightAI-agent" target="_blank" class="group block h-full">
-                    <div class="p-8 border border-border rounded-3xl h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-white">
+                    <div class="p-8 border border-white/10 rounded-3xl h-full bg-[#0f0f0f] hover:bg-white/5 hover:border-white/30 transition-all duration-300 hover:-translate-y-1">
                         <div class="flex justify-between items-start mb-6">
-                            <div class="p-3 bg-muted rounded-2xl group-hover:bg-foreground group-hover:text-white transition-colors">
+                            <div class="p-3 bg-white/5 rounded-2xl group-hover:bg-white group-hover:text-black transition-colors">
                                 <i data-lucide="bot" class="w-6 h-6"></i>
                             </div>
-                            <i data-lucide="arrow-up-right" class="text-muted-foreground group-hover:text-foreground transition-colors"></i>
+                            <i data-lucide="arrow-up-right" class="text-muted group-hover:text-white transition-colors"></i>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3">Insight Agent</h3>
-                        <p class="text-muted-foreground mb-6 leading-relaxed">
+                        <h3 class="text-2xl font-bold mb-3 text-white">Insight Agent</h3>
+                        <p class="text-muted mb-6 leading-relaxed">
                             An autonomous AI pipeline (RAG, NL2SQL) that translates unstructured inputs into strict database schemas. Improved query success from 60% to 95%.
                         </p>
                         <div class="flex flex-wrap gap-2 mt-auto">
-                            <span class="text-xs font-medium text-muted-foreground border border-border px-2 py-1 rounded-md">Python</span>
-                            <span class="text-xs font-medium text-muted-foreground border border-border px-2 py-1 rounded-md">LangChain</span>
+                            <span class="text-xs font-medium text-muted border border-white/10 px-2 py-1 rounded-md">Python</span>
+                            <span class="text-xs font-medium text-muted border border-white/10 px-2 py-1 rounded-md">LangChain</span>
                         </div>
                     </div>
                 </a>
 
                 <a href="#" class="group block h-full">
-                    <div class="p-8 border border-border rounded-3xl h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-white">
+                    <div class="p-8 border border-white/10 rounded-3xl h-full bg-[#0f0f0f] hover:bg-white/5 hover:border-white/30 transition-all duration-300 hover:-translate-y-1">
                         <div class="flex justify-between items-start mb-6">
-                            <div class="p-3 bg-muted rounded-2xl group-hover:bg-foreground group-hover:text-white transition-colors">
+                            <div class="p-3 bg-white/5 rounded-2xl group-hover:bg-white group-hover:text-black transition-colors">
                                 <i data-lucide="layout-template" class="w-6 h-6"></i>
                             </div>
-                            <i data-lucide="arrow-up-right" class="text-muted-foreground group-hover:text-foreground transition-colors"></i>
+                            <i data-lucide="arrow-up-right" class="text-muted group-hover:text-white transition-colors"></i>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3">SAP Lightweight View</h3>
-                        <p class="text-muted-foreground mb-6 leading-relaxed">
+                        <h3 class="text-2xl font-bold mb-3 text-white">SAP Lightweight View</h3>
+                        <p class="text-muted mb-6 leading-relaxed">
                             Optimized data-flow patterns to support high-throughput enterprise environments with 99.9% View Mode stability for 2,000+ tenants.
                         </p>
                         <div class="flex flex-wrap gap-2 mt-auto">
-                            <span class="text-xs font-medium text-muted-foreground border border-border px-2 py-1 rounded-md">React</span>
-                            <span class="text-xs font-medium text-muted-foreground border border-border px-2 py-1 rounded-md">Performance</span>
+                            <span class="text-xs font-medium text-muted border border-white/10 px-2 py-1 rounded-md">React</span>
+                            <span class="text-xs font-medium text-muted border border-white/10 px-2 py-1 rounded-md">Performance</span>
                         </div>
                     </div>
                 </a>
                 
                 <a href="https://github.com/ucantfindme/FYP" target="_blank" class="group block h-full">
-                    <div class="p-8 border border-border rounded-3xl h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-white">
+                    <div class="p-8 border border-white/10 rounded-3xl h-full bg-[#0f0f0f] hover:bg-white/5 hover:border-white/30 transition-all duration-300 hover:-translate-y-1">
                         <div class="flex justify-between items-start mb-6">
-                            <div class="p-3 bg-muted rounded-2xl group-hover:bg-foreground group-hover:text-white transition-colors">
+                            <div class="p-3 bg-white/5 rounded-2xl group-hover:bg-white group-hover:text-black transition-colors">
                                 <i data-lucide="gamepad-2" class="w-6 h-6"></i>
                             </div>
-                            <i data-lucide="arrow-up-right" class="text-muted-foreground group-hover:text-foreground transition-colors"></i>
+                            <i data-lucide="arrow-up-right" class="text-muted group-hover:text-white transition-colors"></i>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3">Guess IT! Trivia</h3>
-                        <p class="text-muted-foreground mb-6 leading-relaxed">
+                        <h3 class="text-2xl font-bold mb-3 text-white">Guess IT! Trivia</h3>
+                        <p class="text-muted mb-6 leading-relaxed">
                              Online multiplayer trivia platform powered by NLP-processed Kaggle datasets. Real-time multiplayer mechanics.
                         </p>
                         <div class="flex flex-wrap gap-2 mt-auto">
-                            <span class="text-xs font-medium text-muted-foreground border border-border px-2 py-1 rounded-md">React</span>
-                            <span class="text-xs font-medium text-muted-foreground border border-border px-2 py-1 rounded-md">NLP</span>
+                            <span class="text-xs font-medium text-muted border border-white/10 px-2 py-1 rounded-md">React</span>
+                            <span class="text-xs font-medium text-muted border border-white/10 px-2 py-1 rounded-md">NLP</span>
                         </div>
                     </div>
                 </a>
 
                  <a href="https://github.com/praneeth16502/Blind-Assistance-System" target="_blank" class="group block h-full">
-                    <div class="p-8 border border-border rounded-3xl h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-white">
+                    <div class="p-8 border border-white/10 rounded-3xl h-full bg-[#0f0f0f] hover:bg-white/5 hover:border-white/30 transition-all duration-300 hover:-translate-y-1">
                         <div class="flex justify-between items-start mb-6">
-                            <div class="p-3 bg-muted rounded-2xl group-hover:bg-foreground group-hover:text-white transition-colors">
+                            <div class="p-3 bg-white/5 rounded-2xl group-hover:bg-white group-hover:text-black transition-colors">
                                 <i data-lucide="eye" class="w-6 h-6"></i>
                             </div>
-                            <i data-lucide="arrow-up-right" class="text-muted-foreground group-hover:text-foreground transition-colors"></i>
+                            <i data-lucide="arrow-up-right" class="text-muted group-hover:text-white transition-colors"></i>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3">Blind Assistance System</h3>
-                        <p class="text-muted-foreground mb-6 leading-relaxed">
+                        <h3 class="text-2xl font-bold mb-3 text-white">Blind Assistance System</h3>
+                        <p class="text-muted mb-6 leading-relaxed">
                             Real-time object detection system with text-to-speech feedback, built to assist visually impaired users navigate independently.
                         </p>
                         <div class="flex flex-wrap gap-2 mt-auto">
-                            <span class="text-xs font-medium text-muted-foreground border border-border px-2 py-1 rounded-md">Python</span>
-                            <span class="text-xs font-medium text-muted-foreground border border-border px-2 py-1 rounded-md">CV</span>
+                            <span class="text-xs font-medium text-muted border border-white/10 px-2 py-1 rounded-md">Python</span>
+                            <span class="text-xs font-medium text-muted border border-white/10 px-2 py-1 rounded-md">CV</span>
                         </div>
                     </div>
                 </a>
@@ -261,14 +313,14 @@
             </div>
         </section>
 
-        <footer class="border-t border-border pt-12 pb-12 flex flex-col md:flex-row justify-between items-center gap-6 reveal">
-            <div class="text-muted-foreground">
+        <footer class="border-t border-white/10 pt-12 pb-12 flex flex-col md:flex-row justify-between items-center gap-6 reveal">
+            <div class="text-muted">
                 © 2026 Praneeth Villuri.
             </div>
             <div class="flex gap-6">
-                <a href="https://linkedin.com/in/praneeth-villuri" class="text-muted-foreground hover:text-foreground transition-colors">LinkedIn</a>
-                <a href="https://github.com/praneeth16502" class="text-muted-foreground hover:text-foreground transition-colors">GitHub</a>
-                <a href="mailto:pranee16502@gmail.com" class="text-muted-foreground hover:text-foreground transition-colors">Email</a>
+                <a href="https://linkedin.com/in/praneeth-villuri" class="text-muted hover:text-white transition-colors">LinkedIn</a>
+                <a href="https://github.com/praneeth16502" class="text-muted hover:text-white transition-colors">GitHub</a>
+                <a href="mailto:pranee16502@gmail.com" class="text-muted hover:text-white transition-colors">Email</a>
             </div>
         </footer>
 
@@ -283,7 +335,7 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
-                    observer.unobserve(entry.target); // Only animate once
+                    observer.unobserve(entry.target); 
                 }
             });
         }, {
