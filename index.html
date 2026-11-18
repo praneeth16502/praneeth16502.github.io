@@ -1,504 +1,500 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" class="t-light">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Praneeth Villuri — Full Stack & AI Engineer</title>
-  
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet"/>
-  
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg: #050505;
-      --surface: #0a0a0a;
-      --border: #1e1e2e;
-      --accent: #ffffff;
-      --text: #e8e6f0;
-      --muted: #888888;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    /* ── TEXTURE ── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: 
-        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
-      mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
-      -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 20px; 
-      left: 50%; 
-      transform: translateX(-50%);
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      padding: 0.5rem 0.5rem;
-      background: rgba(18, 18, 18, 0.8);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 9999px;
-      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
-    }
-
-    .nav-link {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--muted);
-      text-decoration: none;
-      padding: 0.5rem 1.2rem;
-      border-radius: 9999px;
-      transition: all 0.2s;
-    }
-    .nav-link:hover { color: #fff; background: rgba(255,255,255,0.1); }
-
-    /* ── HERO ── */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 6rem 1.5rem;
-      position: relative;
-    }
-
-    .hero-container { width: 100%; max-width: 1200px; position: relative; }
-
-    .big-text {
-        font-family: 'Syne', sans-serif;
-        font-weight: 800;
-        font-size: clamp(3.5rem, 11vw, 9rem);
-        line-height: 0.9;
-        text-transform: uppercase;
-        color: #fff;
-        letter-spacing: -0.04em;
-    }
-
-    .reveal {
-        opacity: 0;
-        transform: translateY(30px);
-        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    .hero-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.8rem 1.8rem;
-        border: 1px solid rgba(255,255,255,0.2);
-        border-radius: 99px;
-        color: #fff;
-        text-decoration: none;
-        font-family: 'Space Mono', monospace;
-        font-size: 0.85rem;
-        transition: all 0.3s;
-    }
-    .hero-btn:hover { background: #fff; color: #000; transform: translateY(-2px); }
-
-    /* ── SECTIONS ── */
-    section { max-width: 1100px; margin: 0 auto; padding: 8rem 2rem; }
-
-    .section-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--muted);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-      display: block;
-    }
-
-    h2 {
-      font-family: 'Space Mono', monospace;
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 3rem;
-      letter-spacing: -0.02em;
-    }
-
-    /* ── CARDS ── */
-    .card-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 1.5rem;
-    }
-
-    .glass-card {
-        background: rgba(20, 20, 25, 0.6);
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: 2rem;
-        transition: all 0.3s ease;
-    }
-    .glass-card:hover {
-        border-color: rgba(255,255,255,0.2);
-        transform: translateY(-5px);
-        background: rgba(30, 30, 35, 0.8);
-    }
-
-    .tag {
-        display: inline-block;
-        padding: 4px 10px;
-        border-radius: 6px;
-        background: rgba(255,255,255,0.05);
-        border: 1px solid rgba(255,255,255,0.1);
-        font-family: 'Space Mono', monospace;
-        font-size: 0.7rem;
-        color: var(--muted);
-        margin: 0 4px 4px 0;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 3rem 2rem;
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-      color: var(--muted);
-      font-family: 'Space Mono', monospace;
-      font-size: 0.8rem;
-    }
-    @media(min-width: 768px) { footer { flex-direction: row; justify-content: space-between; } }
-    .icon-link { color: var(--muted); transition: color 0.2s; }
-    .icon-link:hover { color: #fff; }
-
-    /* Bullet points */
-    .job-bullets li {
-        position: relative;
-        padding-left: 1.5em;
-        margin-bottom: 0.5em;
-        color: #a1a1aa;
-        font-size: 0.95rem;
-    }
-    .job-bullets li::before {
-        content: "▹";
-        position: absolute;
-        left: 0;
-        color: #fff;
-    }
-
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Praneeth Villuri — Member of Technical Staff, Lyzr AI</title>
+<meta name="description" content="Praneeth Villuri: full stack, AI engineering and forward deployed. Led end-to-end development of Spotlight, Lyzr's agentic platform for investors, deployed at Accenture Ventures.">
+<meta property="og:title" content="Praneeth Villuri">
+<meta property="og:description" content="Member of Technical Staff at Lyzr AI. Full stack, AI engineering, forward deployed.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://praneeth16502.github.io/">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%233346E6'/%3E%3Cellipse cx='23' cy='28' rx='5' ry='8' fill='%23F7F7F5'/%3E%3Cellipse cx='41' cy='28' rx='5' ry='8' fill='%23F7F7F5'/%3E%3Crect x='24' y='44' width='16' height='5' rx='2.5' fill='%23F7F7F5'/%3E%3C/svg%3E">
+<script>
+(function () {
+  var t = null;
+  try { t = localStorage.getItem('theme'); } catch (e) {}
+  if (t !== 'light' && t !== 'dark') t = (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+  document.documentElement.className = 't-' + t;
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+[hidden]{display:none !important}
+body{background:var(--bg)}
+.ic-sun,.ic-moon{display:flex}
+.t-light .ic-sun{display:none}
+.t-dark .ic-moon{display:none}
+body{margin:0}
+html{scroll-behavior:smooth}
+.t-light{--bg:#F7F7F5;--bg-alt:#EEEEEB;--surface:#FFFFFF;--ink:#0F1115;--muted:#555A66;--line:#D9D9D4;--accent:#3346E6;--accent-soft:#E8EBFD;--band:#0F1115;--band-ink:#F7F7F5;--band-muted:#A3A7B1;--band-accent:#A9B4FF}
+.t-dark{--bg:#0D0E11;--bg-alt:#131519;--surface:#1A1D22;--ink:#EEEEEA;--muted:#A3A7B1;--line:#2B2F36;--accent:#8C9BFF;--accent-soft:#1D2240;--band:#1C2029;--band-ink:#EEEEEA;--band-muted:#A3A7B1;--band-accent:#A9B4FF}
+a{color:var(--accent)}a:hover{color:var(--ink)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.nav{color:var(--muted);text-decoration:none}.nav:hover{color:var(--ink)}
+.btn-solid{background:var(--ink);color:var(--bg);border:1px solid var(--ink);text-decoration:none}.btn-solid:hover{background:var(--accent);border-color:var(--accent);color:#FFFFFF}
+.btn-line{background:transparent;color:var(--ink);border:1px solid var(--line);text-decoration:none}.btn-line:hover{border-color:var(--ink);color:var(--ink)}
+.chip{background:transparent;color:var(--ink);border:1px solid var(--line);cursor:pointer}
+.chip:hover{border-color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.icon-btn{background:transparent;color:var(--ink);border:1px solid var(--line);cursor:pointer}.icon-btn:hover{border-color:var(--ink)}
+.on-band{color:var(--band-ink)}.on-band:hover{color:var(--band-accent)}
+.card{transition:transform .2s ease,border-color .2s ease}
+.card:hover{transform:translateY(-4px);border-color:var(--ink)}
+.lid{animation:wink 5.2s infinite}
+.lid-late{animation:wink 6.1s 1.3s infinite}
+.mouth{height:6px}
+.mouth.talk{animation:talk .32s ease-in-out infinite alternate}
+.marq{animation:slide 32s linear infinite}
+.caret{display:inline-block;width:0.5em;height:1em;margin-left:2px;vertical-align:-0.14em;background:currentColor;animation:blink 0.9s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+@keyframes wink{0%,95%,100%{transform:scaleY(1)}97.5%{transform:scaleY(0.08)}}
+@keyframes talk{from{height:5px}to{height:18px}}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.caret,.lid,.lid-late,.mouth.talk,.marq{animation:none}.card{transition:none}}
+</style>
 </head>
 <body>
+<div id="root" style="min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; background: var(--bg); color: var(--ink); font-family: Inter, 'Helvetica Neue', Arial, sans-serif; font-size: 17px; line-height: 1.55; transition: background-color .2s ease, color .2s ease">
 
-<nav>
-  <a href="#" class="nav-link">Home</a>
-  <a href="#experience" class="nav-link">Exp</a>
-  <a href="#skills" class="nav-link">Skills</a>
-  <a href="#projects" class="nav-link">Work</a>
-  <a href="mailto:pranee16502@gmail.com" class="nav-link">Contact</a>
+<header style="width: 100%; max-width: 1280px; margin: 0 auto; box-sizing: border-box; padding: 20px clamp(20px, 5vw, 64px) 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px">
+<nav aria-label="Sections" style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 26px; font-size: 15px; font-weight: 500">
+<a class="nav" href="#experience" style="padding: 10px 0">Spotlight</a>
+<a class="nav" href="#sap" style="padding: 10px 0">SAP</a>
+<a class="nav" href="#work" style="padding: 10px 0">Projects</a>
+<a class="nav" href="#skills" style="padding: 10px 0">Skills</a>
+<a class="nav" href="#contact" style="padding: 10px 0">Contact</a>
 </nav>
+<div style="display: flex; align-items: center; gap: 10px">
+<a class="btn-line" href="https://praneeth16502.github.io/resume.pdf" style="font-size: 15px; font-weight: 500; padding: 10px 16px; border-radius: 999px">Download résumé</a>
+<button class="icon-btn" type="button" id="theme-toggle" aria-label="Switch color theme" style="width: 44px; height: 44px; border-radius: 999px; display: flex; align-items: center; justify-content: center; padding: 0">
+<span class="ic-sun"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></span>
+<span class="ic-moon"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg></span>
+</button>
+</div>
+</header>
 
-<div class="hero">
-  <div class="hero-container">
-    
-    <div class="reveal">
-        <h1 class="big-text">Full-stack</h1>
-    </div>
+<main id="top" style="display: flex; flex-direction: column; flex: 1">
 
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-center py-8 md:py-4 reveal" style="transition-delay: 100ms;">
-        <p class="text-lg md:text-xl text-[#888] max-w-lg leading-relaxed font-light">
-            I specialize in architecting <span class="text-white font-medium italic">deterministic AI pipelines</span>, 
-            <span class="text-white font-medium italic">scalable backends</span>, and responsive frontends for enterprise giants.
-        </p>
-        <div class="mt-6 md:mt-0">
-            <a href="PraneethVilluri-FullStack.pdf" target="_blank" class="hero-btn">
-                Download CV 
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-            </a>
-        </div>
-    </div>
+<section style="background: var(--bg)">
+<div style="width: 100%; max-width: 1280px; margin: 0 auto; box-sizing: border-box; padding: 40px clamp(20px, 5vw, 64px) 88px; display: flex; flex-direction: column; gap: 36px">
 
-    <div class="text-right reveal" style="transition-delay: 200ms;">
-        <h1 class="big-text">Engineer</h1>
-    </div>
+<p style="margin: 0; font-family: 'JetBrains Mono', Menlo, monospace; font-size: 14px; color: var(--muted)">Member of Technical Staff · Lyzr AI · Bengaluru</p>
+<h1 style="margin: 0; font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(64px, 13vw, 200px); line-height: 0.88; font-weight: 700; letter-spacing: -0.055em">Praneeth Villuri<span style="color: var(--accent)">.</span></h1>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-16 reveal" style="transition-delay: 300ms;">
-        <div class="glass-card p-6 flex flex-col justify-between h-48">
-            <div>
-                <h3 class="font-bold text-white text-lg font-[Syne]">Who I am</h3>
-                <p class="text-xs text-muted font-mono mt-1">ABOUT</p>
-            </div>
-            <p class="text-sm text-[#888]">Full Stack Engineer at SAP Labs. Tech enthusiast & builder.</p>
-        </div>
-        
-        <a href="#experience" class="glass-card p-6 flex flex-col justify-between h-48 cursor-pointer group">
-            <div>
-                <h3 class="font-bold text-white text-lg font-[Syne]">What I do</h3>
-                <p class="text-xs text-muted font-mono mt-1">EXPERIENCE</p>
-            </div>
-            <div class="flex justify-between items-end">
-                <p class="text-sm text-[#888]">Building at scale.</p>
-                <span class="text-white opacity-0 group-hover:opacity-100 transition-opacity">→</span>
-            </div>
-        </a>
-
-        <a href="#skills" class="glass-card p-6 flex flex-col justify-between h-48 cursor-pointer group">
-            <div>
-                <h3 class="font-bold text-white text-lg font-[Syne]">How I work</h3>
-                <p class="text-xs text-muted font-mono mt-1">SKILLS</p>
-            </div>
-            <div class="flex justify-between items-end">
-                <p class="text-sm text-[#888]">Modern tech stack.</p>
-                <span class="text-white opacity-0 group-hover:opacity-100 transition-opacity">→</span>
-            </div>
-        </a>
-
-        <a href="#projects" class="glass-card p-6 flex flex-col justify-between h-48 cursor-pointer group">
-            <div>
-                <h3 class="font-bold text-white text-lg font-[Syne]">What I built</h3>
-                <p class="text-xs text-muted font-mono mt-1">PROJECTS</p>
-            </div>
-            <div class="flex justify-between items-end">
-                <p class="text-sm text-[#888]">Crafted solutions.</p>
-                <span class="text-white opacity-0 group-hover:opacity-100 transition-opacity">→</span>
-            </div>
-        </a>
-    </div>
-
-  </div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<span style="border: 1px solid var(--ink); padding: 6px 16px; border-radius: 999px; font-size: 16px; font-weight: 500">Full stack</span>
+<span style="border: 1px solid var(--ink); padding: 6px 16px; border-radius: 999px; font-size: 16px; font-weight: 500">AI engineering</span>
+<span style="border: 1px solid var(--ink); padding: 6px 16px; border-radius: 999px; font-size: 16px; font-weight: 500">Forward deployed</span>
 </div>
 
-<section id="experience">
-  <span class="section-label">// 01 — EXPERIENCE</span>
-  <h2>Where I've Worked</h2>
-  
-  <div class="space-y-6">
-    <div class="glass-card flex flex-col md:flex-row gap-8 reveal">
-        <div class="md:w-1/4 flex flex-col justify-between">
-            <div>
-                <h3 class="font-bold text-white text-xl font-[Syne]">SAP Labs</h3>
-                <span class="font-mono text-sm text-[#888] mt-1 block">Bengaluru, India</span>
-            </div>
-            <span class="font-mono text-xs text-white bg-white/10 w-fit px-2 py-1 rounded mt-4">2023 — Present</span>
-        </div>
-        <div class="md:w-3/4 border-l border-white/10 md:pl-8">
-            <h4 class="text-lg font-bold text-white mb-2 font-mono">Developer Associate (Full Stack)</h4>
-            <p class="text-[#888] text-sm leading-relaxed mb-4">
-                Core engineer for SAP Analytics Cloud, designing scalable web architectures for 2,000+ enterprise tenants with 99.9% stability.
-            </p>
-            <ul class="job-bullets mb-6">
-                <li><strong>Backend & APIs:</strong> Designed RESTful APIs using Python (FastAPI) and Node.js, integrating with SAP HANA and PostgreSQL.</li>
-                <li><strong>Observability:</strong> Led Root Cause Analysis (RCA) using Splunk and Grafana, reducing recurring L3 incidents by 30%.</li>
-                <li><strong>AI Integration:</strong> Engineered the "Insight Agent" pipeline (RAG, NL2SQL) to translate user queries into strict DB schemas.</li>
-                <li><strong>CI/CD:</strong> Automated regression validation for 20+ workflows, cutting manual verification effort by 80%.</li>
-            </ul>
-            <div>
-                <span class="tag">React</span>
-                <span class="tag">TypeScript</span>
-                <span class="tag">Python</span>
-                <span class="tag">FastAPI</span>
-                <span class="tag">Docker</span>
-            </div>
-        </div>
-    </div>
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px 48px">
+<p style="margin: 0; flex: 1 1 420px; max-width: 30em; font-size: clamp(20px, 2vw, 26px); line-height: 1.35; font-weight: 500; letter-spacing: -0.01em">He led end-to-end development of Spotlight, Lyzr’s agentic platform for investors, and deployed it at Accenture Ventures. Two of his agents are here to talk about him.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<a class="btn-solid" href="mailto:pranee16502@gmail.com" style="font-size: 16px; font-weight: 600; padding: 13px 24px; border-radius: 999px">Email Praneeth</a>
+<a class="btn-line" href="#experience" style="font-size: 16px; font-weight: 600; padding: 13px 24px; border-radius: 999px">See Spotlight</a>
+</div>
+</div>
 
-    <div class="glass-card flex flex-col md:flex-row gap-8 reveal">
-        <div class="md:w-1/4 flex flex-col justify-between">
-            <div>
-                <h3 class="font-bold text-white text-xl font-[Syne]">SAP Labs</h3>
-                <span class="font-mono text-sm text-[#888] mt-1 block">Bengaluru, India</span>
-            </div>
-            <span class="font-mono text-xs text-white bg-white/10 w-fit px-2 py-1 rounded mt-4">Feb — July 2023</span>
-        </div>
-        <div class="md:w-3/4 border-l border-white/10 md:pl-8">
-            <h4 class="text-lg font-bold text-white mb-2 font-mono">Scholar Intern</h4>
-            <p class="text-[#888] text-sm leading-relaxed mb-4">
-                Research and development for next-gen AI analytics tools.
-            </p>
-            <ul class="job-bullets mb-6">
-                <li>Developed the MVP for 'Insight Agent', enabling non-technical users to query databases using natural language.</li>
-                <li>Implemented RAG pipelines using LangChain to ground LLM responses in enterprise data.</li>
-            </ul>
-            <div>
-                <span class="tag">Python</span>
-                <span class="tag">LangChain</span>
-                <span class="tag">AI Agents</span>
-            </div>
-        </div>
-    </div>
-  </div>
+<div style="display: flex; flex-direction: column; gap: 22px; padding-top: 28px; border-top: 1px solid var(--line)">
+
+<div style="min-height: 400px; display: flex; flex-direction: column; gap: 16px">
+
+<div style="display: flex; align-items: flex-end; gap: clamp(12px, 2vw, 20px)">
+<div aria-hidden="true" style="flex: none; width: clamp(72px, 9vw, 112px); height: clamp(72px, 9vw, 112px); box-sizing: border-box; border-radius: 50%; background: var(--surface); border: 1.5px solid var(--ink); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px">
+<div style="display: flex; gap: 16px; transform: translate(calc(var(--lx, 0) * 7px), calc(var(--ly, 0) * 5px))"><span class="lid" style="display: block; width: 12px; height: 18px; border-radius: 50%; background: var(--ink)"></span><span class="lid" style="display: block; width: 12px; height: 18px; border-radius: 50%; background: var(--ink)"></span></div>
+<span id="ask-mouth" class="mouth" style="display: block; width: 24px; border-radius: 8px; background: var(--ink)"></span>
+</div>
+<div style="min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 6px">
+<span style="font-family: 'JetBrains Mono', Menlo, monospace; font-size: 13px; color: var(--muted)">hiring-agent</span>
+<p style="margin: 0; box-sizing: border-box; background: var(--surface); border: 1px solid var(--line); padding: 14px 22px; border-radius: 22px 22px 22px 4px; font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(20px, 2vw, 26px); font-weight: 600; line-height: 1.25; letter-spacing: -0.015em"><span id="q-text">Who is Praneeth Villuri?</span><span id="q-caret" class="caret" aria-hidden="true" hidden></span></p>
+</div>
+</div>
+
+<div id="calls" style="display: flex; flex-direction: column; gap: 16px">
+<div class="call" style="align-self: flex-end; max-width: 100%; box-sizing: border-box; padding-right: clamp(84px, 11vw, 132px); font-family: 'JetBrains Mono', 'SFMono-Regular', Menlo, monospace; font-size: 14px; line-height: 1.4; color: var(--muted); overflow-wrap: anywhere">→ read("resume.pdf", section="summary")</div>
+</div>
+
+<div id="answer-wrap" style="align-self: flex-end; max-width: 100%; display: flex; align-items: flex-end; gap: clamp(12px, 2vw, 20px)">
+<div style="min-width: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 6px">
+<span style="font-family: 'JetBrains Mono', Menlo, monospace; font-size: 13px; color: var(--muted)">praneeth-agent</span>
+<p style="margin: 0; max-width: 36em; box-sizing: border-box; background: var(--accent-soft); color: var(--ink); padding: 16px 22px; border-radius: 22px 22px 4px 22px; font-size: clamp(17px, 1.5vw, 20px); font-weight: 500; line-height: 1.45"><span id="a-text">A Member of Technical Staff at Lyzr AI with 3+ years shipping LLM products to production. He led end-to-end development of Spotlight, an agentic platform for investors, and forward-deployed it at Accenture Ventures. Before that, SAP Analytics Cloud.</span><span id="a-caret" class="caret" aria-hidden="true" hidden></span></p>
+</div>
+<div aria-hidden="true" style="flex: none; width: clamp(72px, 9vw, 112px); height: clamp(72px, 9vw, 112px); box-sizing: border-box; border-radius: 26px; background: var(--accent); border: 1.5px solid var(--ink); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px">
+<div style="display: flex; gap: 16px; transform: translate(calc(var(--lx, 0) * 7px), calc(var(--ly, 0) * 5px))"><span class="lid-late" style="display: block; width: 12px; height: 18px; border-radius: 50%; background: var(--bg)"></span><span class="lid-late" style="display: block; width: 12px; height: 18px; border-radius: 50%; background: var(--bg)"></span></div>
+<span id="answer-mouth" class="mouth" style="display: block; width: 24px; border-radius: 8px; background: var(--bg)"></span>
+</div>
+</div>
+
+<div id="done-wrap" style="align-self: flex-end; box-sizing: border-box; padding-right: clamp(84px, 11vw, 132px); display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px 18px; font-size: 15px">
+<span id="source" style="color: var(--muted)">From his résumé, summary</span>
+<a id="jump" href="#experience" style="font-weight: 600">See Spotlight</a>
+</div>
+
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 12px">
+<p style="margin: 0; font-size: 15px; font-weight: 500; color: var(--muted)">Choose what the hiring agent asks next</p>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<button class="chip" type="button" data-topic="intro" aria-pressed="true" style="font: inherit; font-size: 15px; font-weight: 500; min-height: 44px; padding: 8px 18px; border-radius: 999px">Who is he?</button>
+<button class="chip" type="button" data-topic="lyzr" aria-pressed="false" style="font: inherit; font-size: 15px; font-weight: 500; min-height: 44px; padding: 8px 18px; border-radius: 999px">What is Spotlight?</button>
+<button class="chip" type="button" data-topic="fde" aria-pressed="false" style="font: inherit; font-size: 15px; font-weight: 500; min-height: 44px; padding: 8px 18px; border-radius: 999px">Is he forward deployed?</button>
+<button class="chip" type="button" data-topic="stack" aria-pressed="false" style="font: inherit; font-size: 15px; font-weight: 500; min-height: 44px; padding: 8px 18px; border-radius: 999px">Full stack too?</button>
+<button class="chip" type="button" data-topic="sap" aria-pressed="false" style="font: inherit; font-size: 15px; font-weight: 500; min-height: 44px; padding: 8px 18px; border-radius: 999px">What did he ship at SAP?</button>
+<button class="chip" type="button" data-topic="projects" aria-pressed="false" style="font: inherit; font-size: 15px; font-weight: 500; min-height: 44px; padding: 8px 18px; border-radius: 999px">What else has he built?</button>
+<button class="chip" type="button" data-topic="contact" aria-pressed="false" style="font: inherit; font-size: 15px; font-weight: 500; min-height: 44px; padding: 8px 18px; border-radius: 999px">How do I reach him?</button>
+</div>
+</div>
+
+</div>
+</div>
 </section>
 
-<section id="skills">
-  <span class="section-label">// 02 — SKILLS</span>
-  <h2>Technical Arsenal</h2>
+<div aria-hidden="true" style="overflow: hidden; background: var(--band); color: var(--band-ink); padding: 20px 0">
+<div class="marq" style="display: flex; width: max-content">
+<span style="white-space: nowrap; padding-right: 40px; font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(32px, 4.4vw, 60px); line-height: 1.1; font-weight: 600; letter-spacing: -0.03em">Agentic workflows <span style="color: var(--band-accent)">/</span> LangGraph <span style="color: var(--band-accent)">/</span> RAG <span style="color: var(--band-accent)">/</span> NL2SQL <span style="color: var(--band-accent)">/</span> LLM evals <span style="color: var(--band-accent)">/</span> React <span style="color: var(--band-accent)">/</span> TypeScript <span style="color: var(--band-accent)">/</span> FastAPI <span style="color: var(--band-accent)">/</span> AWS <span style="color: var(--band-accent)">/</span></span>
+<span style="white-space: nowrap; padding-right: 40px; font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(32px, 4.4vw, 60px); line-height: 1.1; font-weight: 600; letter-spacing: -0.03em">Agentic workflows <span style="color: var(--band-accent)">/</span> LangGraph <span style="color: var(--band-accent)">/</span> RAG <span style="color: var(--band-accent)">/</span> NL2SQL <span style="color: var(--band-accent)">/</span> LLM evals <span style="color: var(--band-accent)">/</span> React <span style="color: var(--band-accent)">/</span> TypeScript <span style="color: var(--band-accent)">/</span> FastAPI <span style="color: var(--band-accent)">/</span> AWS <span style="color: var(--band-accent)">/</span></span>
+</div>
+</div>
 
-  <div class="card-grid">
-    <div class="glass-card reveal">
-        <h3 class="text-white font-bold mb-4 font-mono text-lg">AI / ML</h3>
-        <div class="flex flex-wrap gap-1">
-            <span class="tag">RAG</span>
-            <span class="tag">LLMs</span>
-            <span class="tag">Embeddings</span>
-            <span class="tag">Prompt Eng</span>
-            <span class="tag">NLP</span>
-            <span class="tag">Computer Vision</span>
-        </div>
-    </div>
-    
-    <div class="glass-card reveal">
-        <h3 class="text-white font-bold mb-4 font-mono text-lg">Frontend</h3>
-        <div class="flex flex-wrap gap-1">
-            <span class="tag">React</span>
-            <span class="tag">Next.js</span>
-            <span class="tag">TypeScript</span>
-            <span class="tag">Tailwind</span>
-            <span class="tag">Framer Motion</span>
-        </div>
-    </div>
+<section id="experience" style="background: var(--bg)">
+<div style="width: 100%; max-width: 1280px; margin: 0 auto; box-sizing: border-box; padding: 104px clamp(20px, 5vw, 64px) 112px; display: flex; flex-direction: column; gap: 48px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<code style="font-family: 'JetBrains Mono', Menlo, monospace; font-size: 14px; color: var(--muted)">hiring-agent: What is he building at Lyzr?</code>
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px 56px">
+<h2 style="margin: 0; font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(72px, 13vw, 196px); line-height: 0.86; font-weight: 700; letter-spacing: -0.055em">Spotlight</h2>
+<div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 8px; padding-bottom: 8px">
+<p style="margin: 0; font-size: 17px; font-weight: 600">Lyzr AI · Member of Technical Staff · Mar 2026 to present</p>
+<p style="margin: 0; max-width: 30em; font-size: clamp(19px, 1.7vw, 23px); line-height: 1.4; color: var(--muted)">Lyzr’s agentic CVC intelligence platform: a one-stop platform for investors. He led it end to end, from multi-agent pipelines to the React UI, and forward-deployed it for Accenture Ventures.</p>
+</div>
+</div>
+</div>
 
-    <div class="glass-card reveal">
-        <h3 class="text-white font-bold mb-4 font-mono text-lg">Backend</h3>
-        <div class="flex flex-wrap gap-1">
-            <span class="tag">Python</span>
-            <span class="tag">FastAPI</span>
-            <span class="tag">Node.js</span>
-            <span class="tag">PostgreSQL</span>
-            <span class="tag">Docker</span>
-        </div>
-    </div>
-  </div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 0; border-top: 1.5px solid var(--ink); border-bottom: 1px solid var(--line)">
+<div style="padding: 22px 24px 22px 0; display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(44px, 5vw, 68px); line-height: 1; font-weight: 700; letter-spacing: -0.045em">50+</span><span style="font-size: 15px; color: var(--muted)">clients on the platform, deployed at Accenture Ventures</span></div>
+<div style="padding: 22px 24px 22px 0; display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(44px, 5vw, 68px); line-height: 1; font-weight: 700; letter-spacing: -0.045em">1,200</span><span style="font-size: 15px; color: var(--muted)">business UAT scenarios run on the client’s environment</span></div>
+<div style="padding: 22px 24px 22px 0; display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(44px, 5vw, 68px); line-height: 1; font-weight: 700; letter-spacing: -0.045em">88-pt</span><span style="font-size: 15px; color: var(--muted)">explainable startup scoring framework</span></div>
+<div style="padding: 22px 24px 22px 0; display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(44px, 5vw, 68px); line-height: 1; font-weight: 700; letter-spacing: -0.045em; color: var(--accent)">80%</span><span style="font-size: 15px; color: var(--muted)">less analyst evaluation time with the board-deck agent</span></div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: 20px">
+<article class="card" style="box-sizing: border-box; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 30px; display: flex; flex-direction: column; gap: 14px">
+<p style="margin: 0; font-family: 'JetBrains Mono', Menlo, monospace; font-size: 13px; color: var(--accent)">AI engineering</p>
+<h3 style="margin: 0; font-family: 'Inter Tight', Inter, sans-serif; font-size: 28px; line-height: 1.1; font-weight: 700; letter-spacing: -0.025em">Agents that do the due diligence</h3>
+<ul style="margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 8px; color: var(--muted); font-size: 16px">
+<li>LLM orchestration and retrieval in LangChain and LangGraph, unifying PitchBook, CB Insights, Crunchbase and LinkedIn into an 88-point explainable scoring framework</li>
+<li>An agentic board-deck generator for investor-ready reports, SWOT and startup shortlists</li>
+<li>LLM evaluation in LangSmith, and MCP servers wired into the agents</li>
+</ul>
+</article>
+<article class="card" style="box-sizing: border-box; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 30px; display: flex; flex-direction: column; gap: 14px">
+<p style="margin: 0; font-family: 'JetBrains Mono', Menlo, monospace; font-size: 13px; color: var(--accent)">Forward deployed</p>
+<h3 style="margin: 0; font-family: 'Inter Tight', Inter, sans-serif; font-size: 28px; line-height: 1.1; font-weight: 700; letter-spacing: -0.025em">On site for Accenture’s rollout</h3>
+<ul style="margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 8px; color: var(--muted); font-size: 16px">
+<li>Ran the client’s 1,200-scenario business UAT for the Corporate Development rollout, tracing each failed scenario to root cause and driving fixes to release</li>
+<li>Hardened output reaching investors: entity disambiguation for web-research citations and deterministic checks on revenue, funding and currency figures</li>
+<li>Sharply reduced wrong-company data in client reports</li>
+</ul>
+</article>
+<article class="card" style="box-sizing: border-box; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 30px; display: flex; flex-direction: column; gap: 14px">
+<p style="margin: 0; font-family: 'JetBrains Mono', Menlo, monospace; font-size: 13px; color: var(--accent)">Full stack</p>
+<h3 style="margin: 0; font-family: 'Inter Tight', Inter, sans-serif; font-size: 28px; line-height: 1.1; font-weight: 700; letter-spacing: -0.025em">The whole product surface</h3>
+<ul style="margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 8px; color: var(--muted); font-size: 16px">
+<li>React and TypeScript front end, FastAPI and Node.js APIs, REST and SSE streaming, PostgreSQL and MongoDB</li>
+<li>A frame-safe streaming reader for live agent responses; Excel import and role-based access in Thesis Builder</li>
+<li>Per-tenant feature flags (OpenFeature), client theming, and AWS Lambda, Step Functions and DynamoDB ingestion jobs</li>
+</ul>
+</article>
+</div>
+</div>
 </section>
 
-<section id="projects">
-  <span class="section-label">// 03 — WORK</span>
-  <h2>Selected Projects</h2>
+<section id="sap" style="background: var(--bg-alt)">
+<div style="width: 100%; max-width: 1280px; margin: 0 auto; box-sizing: border-box; padding: 104px clamp(20px, 5vw, 64px) 112px; display: flex; flex-direction: column; gap: 44px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<code style="font-family: 'JetBrains Mono', Menlo, monospace; font-size: 14px; color: var(--muted)">hiring-agent: What did he ship at SAP before that?</code>
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px 56px">
+<h2 style="margin: 0; font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(72px, 13vw, 196px); line-height: 0.86; font-weight: 700; letter-spacing: -0.055em">SAP</h2>
+<div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 8px; padding-bottom: 8px">
+<p style="margin: 0; font-size: 17px; font-weight: 600">SAP Analytics Cloud · Developer Associate · Jul 2023 to Feb 2026</p>
+<p style="margin: 0; max-width: 30em; font-size: clamp(19px, 1.7vw, 23px); line-height: 1.4; color: var(--muted)">Multi-tenant analytics in React and TypeScript, plus the ML pipelines and production debugging underneath.</p>
+</div>
+</div>
+</div>
 
-  <div class="card-grid">
-    <a href="https://github.com/praneeth16502/InsightAI-agent" target="_blank" class="glass-card flex flex-col h-full group reveal">
-        <div class="flex justify-between items-start mb-4">
-            <div class="p-2 bg-white/5 rounded-lg text-2xl">🧠</div>
-            <span class="text-[#888] group-hover:text-white transition-colors">↗</span>
-        </div>
-        <h3 class="text-lg font-bold text-white mb-2 font-mono">InsightAI Agent</h3>
-        <p class="text-sm text-[#888] mb-6 flex-grow">
-            An intelligent AI agent capable of reasoning, retrieving, and acting on complex queries. Built with agentic patterns.
-        </p>
-        <div>
-            <span class="tag">Python</span>
-            <span class="tag">LangChain</span>
-        </div>
-    </a>
-
-    <a href="https://github.com/praneeth16502/rag-knowledge-assistant" target="_blank" class="glass-card flex flex-col h-full group reveal">
-        <div class="flex justify-between items-start mb-4">
-            <div class="p-2 bg-white/5 rounded-lg text-2xl">🔍</div>
-            <span class="text-[#888] group-hover:text-white transition-colors">↗</span>
-        </div>
-        <h3 class="text-lg font-bold text-white mb-2 font-mono">RAG Assistant</h3>
-        <p class="text-sm text-[#888] mb-6 flex-grow">
-            Retrieval-Augmented Generation system with evaluation and grounding to minimize hallucinations.
-        </p>
-        <div>
-            <span class="tag">RAG</span>
-            <span class="tag">FAISS</span>
-        </div>
-    </a>
-
-    <a href="https://github.com/praneeth16502/event-driven-notification-system" target="_blank" class="glass-card flex flex-col h-full group reveal">
-        <div class="flex justify-between items-start mb-4">
-            <div class="p-2 bg-white/5 rounded-lg text-2xl">⚡</div>
-            <span class="text-[#888] group-hover:text-white transition-colors">↗</span>
-        </div>
-        <h3 class="text-lg font-bold text-white mb-2 font-mono">Event System</h3>
-        <p class="text-sm text-[#888] mb-6 flex-grow">
-            Scalable backend notification pipeline built with event-driven architecture for high throughput.
-        </p>
-        <div>
-            <span class="tag">Node.js</span>
-            <span class="tag">Event-Driven</span>
-        </div>
-    </a>
-    
-    <a href="https://github.com/praneeth16502/Blind-Assistance-System" target="_blank" class="glass-card flex flex-col h-full group reveal">
-        <div class="flex justify-between items-start mb-4">
-            <div class="p-2 bg-white/5 rounded-lg text-2xl">👁️</div>
-            <span class="text-[#888] group-hover:text-white transition-colors">↗</span>
-        </div>
-        <h3 class="text-lg font-bold text-white mb-2 font-mono">Blind Assistance</h3>
-        <p class="text-sm text-[#888] mb-6 flex-grow">
-            Real-time object detection system with text-to-speech feedback for visually impaired users.
-        </p>
-        <div>
-            <span class="tag">CV</span>
-            <span class="tag">Python</span>
-        </div>
-    </a>
-  </div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 20px">
+<article style="box-sizing: border-box; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 26px 28px; display: flex; flex-direction: column; gap: 8px">
+<p style="margin: 0; font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(52px, 6vw, 84px); line-height: 0.9; font-weight: 700; letter-spacing: -0.05em">2k+</p>
+<h3 style="margin: 0; font-size: 18px; line-height: 1.3; font-weight: 600">enterprise tenants on Lightweight View Mode</h3>
+<p style="margin: 0; font-size: 15px; color: var(--muted)">Fast, read-optimized dashboard rendering, with a smaller bundle and fewer re-renders.</p>
+</article>
+<article style="box-sizing: border-box; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 26px 28px; display: flex; flex-direction: column; gap: 8px">
+<p style="margin: 0; font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(52px, 6vw, 84px); line-height: 0.9; font-weight: 700; letter-spacing: -0.05em">100+</p>
+<h3 style="margin: 0; font-size: 18px; line-height: 1.3; font-weight: 600">tenants on Horizon theming</h3>
+<p style="margin: 0; font-size: 15px; color: var(--muted)">Consistent, brand-compliant UI across tenants, themes and display contexts.</p>
+</article>
+<article style="box-sizing: border-box; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 26px 28px; display: flex; flex-direction: column; gap: 8px">
+<p style="margin: 0; font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(52px, 6vw, 84px); line-height: 0.9; font-weight: 700; letter-spacing: -0.05em">96%+</p>
+<h3 style="margin: 0; font-size: 18px; line-height: 1.3; font-weight: 600">accuracy classifying 5K+ quarterly reviews</h3>
+<p style="margin: 0; font-size: 15px; color: var(--muted)">Applied ML pipelines in Python and PyTorch for automated insight generation.</p>
+</article>
+<article style="box-sizing: border-box; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 26px 28px; display: flex; flex-direction: column; gap: 8px">
+<p style="margin: 0; font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(52px, 6vw, 84px); line-height: 0.9; font-weight: 700; letter-spacing: -0.05em">30%</p>
+<h3 style="margin: 0; font-size: 18px; line-height: 1.3; font-weight: 600">fewer L3 production incidents</h3>
+<p style="margin: 0; font-size: 15px; color: var(--muted)">Led root-cause analysis on SQL and data-lineage defects affecting 30+ enterprise customers.</p>
+</article>
+<article style="box-sizing: border-box; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 26px 28px; display: flex; flex-direction: column; gap: 8px">
+<p style="margin: 0; font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(52px, 6vw, 84px); line-height: 0.9; font-weight: 700; letter-spacing: -0.05em">800+</p>
+<h3 style="margin: 0; font-size: 18px; line-height: 1.3; font-weight: 600">unit and integration tests</h3>
+<p style="margin: 0; font-size: 15px; color: var(--muted)">Led quality and release, including a 1,200-scenario business UAT; supported SAP Ariba Central Procurement for 250+ procurement officers.</p>
+</article>
+<article style="box-sizing: border-box; background: var(--ink); color: var(--bg); border: 1px solid var(--ink); border-radius: 20px; padding: 26px 28px; display: flex; flex-direction: column; gap: 8px">
+<p style="margin: 0; font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(52px, 6vw, 84px); line-height: 0.9; font-weight: 700; letter-spacing: -0.05em">99.9%</p>
+<h3 style="margin: 0; font-size: 18px; line-height: 1.3; font-weight: 600">View Mode stability across releases</h3>
+<p style="margin: 0; font-size: 15px; opacity: 0.8">Regression validation automated for 20+ analytics workflows, cutting manual verification by 80%.</p>
+</article>
+</div>
+</div>
 </section>
 
-<section id="contact">
-    <div class="glass-card p-8 md:p-12 text-center reveal">
-        <span class="font-mono text-sm text-[#888] mb-4 block">// 04 — CONTACT</span>
-        <h2 class="text-3xl md:text-5xl font-bold text-white mb-6 font-[Syne]">Let's build something.</h2>
-        <p class="text-[#888] max-w-lg mx-auto mb-8">
-            I'm currently open to AI/ML engineering roles and interesting collaborations.
-        </p>
-        <div class="flex justify-center gap-4">
-            <a href="mailto:pranee16502@gmail.com" class="hero-btn bg-white text-black hover:bg-gray-200">
-                Say Hello
-            </a>
-            <a href="https://linkedin.com/in/praneeth-villuri" target="_blank" class="hero-btn">
-                LinkedIn
-            </a>
-        </div>
-    </div>
+<section id="work" style="background: var(--bg)">
+<div style="width: 100%; max-width: 1280px; margin: 0 auto; box-sizing: border-box; padding: 104px clamp(20px, 5vw, 64px) 112px; display: flex; flex-direction: column; gap: 44px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<code style="font-family: 'JetBrains Mono', Menlo, monospace; font-size: 14px; color: var(--muted)">hiring-agent: What else has he built with LLMs?</code>
+<h2 style="margin: 0; font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(44px, 6vw, 88px); line-height: 0.95; font-weight: 700; letter-spacing: -0.045em">Projects</h2>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 20px">
+<article class="card" style="box-sizing: border-box; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: clamp(24px, 3vw, 40px); display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h3 style="margin: 0; font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(36px, 4vw, 52px); line-height: 0.95; font-weight: 700; letter-spacing: -0.04em">InsightAgent</h3>
+<p style="margin: 0; font-size: 15px; color: var(--muted)">Agentic NL2SQL analytics · React, TypeScript, FastAPI</p>
+</div>
+<p style="margin: 0; font-size: 18px; line-height: 1.45">Ask a question about structured data in plain English and watch the answer chart itself in real time.</p>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<p style="margin: 0; font-size: 15px; font-weight: 600">Multi-table query success</p>
+<div style="width: 60%; box-sizing: border-box; background: var(--bg-alt); padding: 10px 16px; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; border-radius: 10px; font-size: 15px"><span>Before</span><span style="font-family: 'Inter Tight', Inter, sans-serif; font-size: 28px; line-height: 1; font-weight: 700">60%</span></div>
+<div style="width: 95%; box-sizing: border-box; background: var(--accent); color: #FFFFFF; padding: 10px 16px; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; border-radius: 10px; font-size: 15px"><span>Schema retrieval, SQL validation, self-correcting retries</span><span style="font-family: 'Inter Tight', Inter, sans-serif; font-size: 28px; line-height: 1; font-weight: 700">95%</span></div>
+</div>
+<p style="margin: 0; font-size: 15px; color: var(--muted)">With evals tracking recall, validity and latency.</p>
+<a href="https://github.com/praneeth16502/InsightAI-agent" style="align-self: flex-start; font-size: 16px; font-weight: 600; padding: 10px 0">View InsightAgent on GitHub →</a>
+</article>
+
+<article class="card" style="box-sizing: border-box; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: clamp(24px, 3vw, 40px); display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h3 style="margin: 0; font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(36px, 4vw, 52px); line-height: 0.95; font-weight: 700; letter-spacing: -0.04em">Knowledge assistant</h3>
+<p style="margin: 0; font-size: 15px; color: var(--muted)">RAG over 1,000+ documents · React, FastAPI, FAISS</p>
+</div>
+<p style="margin: 0; font-size: 18px; line-height: 1.45">Semantic search with document-grounded answers, and every answer shows where it came from.</p>
+<div style="display: flex; flex-direction: column; border-top: 1.5px solid var(--ink)">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--line)"><span style="font-size: 15px">Recall@5</span><span style="font-family: 'Inter Tight', Inter, sans-serif; font-size: 28px; line-height: 1; font-weight: 700">82%</span></div>
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--line)"><span style="font-size: 15px">Latency, with async retrieval</span><span style="font-family: 'Inter Tight', Inter, sans-serif; font-size: 28px; line-height: 1; font-weight: 700">−40%</span></div>
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--line)"><span style="font-size: 15px">Average response time</span><span style="font-family: 'Inter Tight', Inter, sans-serif; font-size: 28px; line-height: 1; font-weight: 700">&lt;2.8 s</span></div>
+</div>
+<p style="margin: 0; font-size: 15px; color: var(--muted)">Tuned through chunking and embedding choices, with source attribution on every answer.</p>
+<a href="https://github.com/praneeth16502/rag-knowledge-assistant" style="align-self: flex-start; font-size: 16px; font-weight: 600; padding: 10px 0">View the knowledge assistant on GitHub →</a>
+</article>
+</div>
+</div>
 </section>
 
-<footer>
-  <span>© 2026 Praneeth Villuri</span>
-  <div class="flex gap-6">
-    <a href="https://github.com/praneeth16502" target="_blank" class="icon-link">GitHub</a>
-    <a href="https://linkedin.com/in/praneeth-villuri" target="_blank" class="icon-link">LinkedIn</a>
-    <a href="mailto:pranee16502@gmail.com" class="icon-link">Email</a>
-  </div>
-</footer>
+<section id="skills" style="background: var(--bg-alt)">
+<div style="width: 100%; max-width: 1280px; margin: 0 auto; box-sizing: border-box; padding: 104px clamp(20px, 5vw, 64px) 56px; display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<code style="font-family: 'JetBrains Mono', Menlo, monospace; font-size: 14px; color: var(--muted)">hiring-agent: What does he work with?</code>
+<h2 style="margin: 0; font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(44px, 6vw, 88px); line-height: 0.95; font-weight: 700; letter-spacing: -0.045em">Skills</h2>
+</div>
+<div style="display: flex; flex-direction: column; border-top: 1.5px solid var(--ink)">
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 40px; padding: 18px 0; border-bottom: 1px solid var(--line)">
+<h3 style="margin: 0; flex: 0 1 300px; min-width: 0; font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(24px, 2.6vw, 34px); line-height: 1.05; font-weight: 700; letter-spacing: -0.03em">AI and LLM</h3>
+<p style="margin: 0; flex: 1 1 420px; min-width: 0; font-size: 18px; color: var(--muted)">Agentic workflows, multi-agent orchestration, RAG, NL2SQL, LLM evals, tool calling, structured outputs, LangChain, LangGraph, LlamaIndex, LangSmith, MCP, FAISS, PyTorch, Hugging Face</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 40px; padding: 18px 0; border-bottom: 1px solid var(--line)">
+<h3 style="margin: 0; flex: 0 1 300px; min-width: 0; font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(24px, 2.6vw, 34px); line-height: 1.05; font-weight: 700; letter-spacing: -0.03em">Frontend</h3>
+<p style="margin: 0; flex: 1 1 420px; min-width: 0; font-size: 18px; color: var(--muted)">React, TypeScript, JavaScript, Redux Toolkit and RTK Query, Tailwind CSS, Radix and shadcn</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 40px; padding: 18px 0; border-bottom: 1px solid var(--line)">
+<h3 style="margin: 0; flex: 0 1 300px; min-width: 0; font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(24px, 2.6vw, 34px); line-height: 1.05; font-weight: 700; letter-spacing: -0.03em">Backend and data</h3>
+<p style="margin: 0; flex: 1 1 420px; min-width: 0; font-size: 18px; color: var(--muted)">Python, FastAPI, Node.js, REST, SSE streaming, microservices, Java, Spring Boot, PostgreSQL, MongoDB, SAP HANA, SQL</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 40px; padding: 18px 0; border-bottom: 1px solid var(--line)">
+<h3 style="margin: 0; flex: 0 1 300px; min-width: 0; font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(24px, 2.6vw, 34px); line-height: 1.05; font-weight: 700; letter-spacing: -0.03em">Infra and quality</h3>
+<p style="margin: 0; flex: 1 1 420px; min-width: 0; font-size: 18px; color: var(--muted)">AWS (S3, Lambda, Step Functions, DynamoDB), GCP, Docker, CI/CD, Splunk, Grafana, Vitest, Playwright</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 40px; padding: 18px 0; border-bottom: 1px solid var(--line)">
+<h3 style="margin: 0; flex: 0 1 300px; min-width: 0; font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(24px, 2.6vw, 34px); line-height: 1.05; font-weight: 700; letter-spacing: -0.03em">With clients</h3>
+<p style="margin: 0; flex: 1 1 420px; min-width: 0; font-size: 18px; color: var(--muted)">Customer onboarding, business UAT, production debugging, per-tenant releases</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="background" style="background: var(--bg-alt)">
+<div style="width: 100%; max-width: 1280px; margin: 0 auto; box-sizing: border-box; padding: 56px clamp(20px, 5vw, 64px) 112px; display: flex; flex-direction: column; gap: 40px">
+<code style="font-family: 'JetBrains Mono', Menlo, monospace; font-size: 14px; color: var(--muted)">hiring-agent: Where did he study, and has he published?</code>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr)); gap: 40px 64px">
+<div style="display: flex; flex-direction: column; gap: 8px; border-top: 1.5px solid var(--ink); padding-top: 22px">
+<h3 style="margin: 0; font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(26px, 2.8vw, 36px); line-height: 1.05; font-weight: 700; letter-spacing: -0.03em">Amrita School of Engineering</h3>
+<p style="margin: 0; font-size: 18px">B.Tech in Computer Science, 2019 to 2023</p>
+<p style="margin: 0; color: var(--muted)">CGPA 8.87 out of 10. Kerala, India.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 20px; border-top: 1.5px solid var(--ink); padding-top: 22px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h3 style="margin: 0; font-size: 20px; line-height: 1.25; font-weight: 600">SAP Generative AI Developer</h3>
+<p style="margin: 0; color: var(--muted)">Certification, 2026.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h3 style="margin: 0; font-size: 20px; line-height: 1.25; font-weight: 600">Surveying Keyword Extractors</h3>
+<p style="margin: 0; color: var(--muted)">IEEE PICET, 2024. An empirical analysis of NLP models for automated keyword extraction.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h3 style="margin: 0; font-size: 20px; line-height: 1.25; font-weight: 600">NLP Datasets for Similarity Analysis</h3>
+<p style="margin: 0; color: var(--muted)">Kaggle, 2023. A curated dataset for semantic similarity, downloaded 200+ times.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="contact" style="flex: 1; background: var(--band); color: var(--band-ink); display: flex; flex-direction: column; justify-content: center">
+<div style="width: 100%; max-width: 1280px; margin: 0 auto; box-sizing: border-box; padding: 104px clamp(20px, 5vw, 64px) 48px; display: flex; flex-direction: column; gap: 32px">
+<code style="font-family: 'JetBrains Mono', Menlo, monospace; font-size: 14px; color: var(--band-muted)">hiring-agent: How do I reach him?</code>
+<a class="on-band" href="mailto:pranee16502@gmail.com" style="align-self: flex-start; font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(32px, 7vw, 108px); line-height: 0.95; font-weight: 700; letter-spacing: -0.05em; overflow-wrap: anywhere; text-decoration-thickness: 0.05em; text-underline-offset: 0.12em">pranee16502@gmail.com</a>
+
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px 20px; padding-top: 8px">
+<div aria-hidden="true" style="flex: none; width: 88px; height: 88px; box-sizing: border-box; border-radius: 50%; background: var(--band-ink); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px">
+<div style="display: flex; gap: 14px; transform: translate(calc(var(--lx, 0) * 6px), calc(var(--ly, 0) * 4px))"><span class="lid" style="display: block; width: 11px; height: 16px; border-radius: 50%; background: var(--band)"></span><span class="lid" style="display: block; width: 11px; height: 16px; border-radius: 50%; background: var(--band)"></span></div>
+<span style="display: block; width: 20px; height: 5px; border-radius: 8px; background: var(--band)"></span>
+</div>
+<div aria-hidden="true" style="flex: none; width: 88px; height: 88px; box-sizing: border-box; border-radius: 22px; background: var(--band-accent); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px">
+<div style="display: flex; gap: 14px; transform: translate(calc(var(--lx, 0) * 6px), calc(var(--ly, 0) * 4px))"><span class="lid-late" style="display: block; width: 11px; height: 16px; border-radius: 50%; background: #0F1115"></span><span class="lid-late" style="display: block; width: 11px; height: 16px; border-radius: 50%; background: #0F1115"></span></div>
+<span style="display: block; width: 20px; height: 5px; border-radius: 8px; background: #0F1115"></span>
+</div>
+<p style="margin: 0; max-width: 22em; box-sizing: border-box; border: 1px solid var(--band-muted); padding: 14px 22px; border-radius: 22px 22px 22px 4px; font-size: clamp(17px, 1.6vw, 21px); line-height: 1.35; font-weight: 500">That address reaches the human, not us.</p>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px 32px; padding-top: 36px; border-top: 1px solid var(--band-muted)">
+<div style="display: flex; flex-wrap: wrap; gap: 4px 32px">
+<a class="on-band" href="https://linkedin.com/in/praneeth-villuri" style="font-size: 18px; font-weight: 600; padding: 10px 0">LinkedIn</a>
+<a class="on-band" href="https://github.com/praneeth16502" style="font-size: 18px; font-weight: 600; padding: 10px 0">GitHub</a>
+<a class="on-band" href="https://praneeth16502.github.io/resume.pdf" style="font-size: 18px; font-weight: 600; padding: 10px 0">Download résumé</a>
+</div>
+<p style="margin: 0; color: var(--band-muted)">Praneeth Villuri, Bengaluru, 2026</p>
+</div>
+</div>
+</section>
+
+</main>
+</div>
 
 <script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
+(function () {
+  var S = {
+      intro: { label: 'Who is he?', q: 'Who is Praneeth Villuri?', calls: ['read("resume.pdf", section="summary")'], a: 'A Member of Technical Staff at Lyzr AI with 3+ years shipping LLM products to production. He led end-to-end development of Spotlight, an agentic platform for investors, and forward-deployed it at Accenture Ventures. Before that, SAP Analytics Cloud.', source: 'From his résumé, summary', href: '#experience', jump: 'See Spotlight' },
+      lyzr: { label: 'What is Spotlight?', q: 'What is he building at Lyzr?', calls: ['query("experience", company="Lyzr")', 'rank(results, by="impact")'], a: 'Spotlight, Lyzr’s agentic CVC intelligence platform, used by 50+ clients. Agents unify PitchBook, CB Insights, Crunchbase and LinkedIn into an 88-point explainable score, and a board-deck agent cut analyst evaluation time by 80%.', source: 'From his work at Lyzr', href: '#experience', jump: 'Read the Spotlight record' },
+      fde: { label: 'Is he forward deployed?', q: 'Has he worked inside a client’s environment?', calls: ['search("experience", text="UAT")'], a: 'Yes. For Accenture’s Corporate Development rollout he ran the client’s 1,200-scenario business UAT on their environment, traced each failure to root cause and drove fixes to release.', source: 'From his work at Lyzr', href: '#experience', jump: 'See the rollout' },
+      stack: { label: 'Full stack too?', q: 'Can he go below the UI?', calls: ['query("skills", area="backend")', 'search("experience", text="streaming")'], a: 'All the way down. React and TypeScript on top, FastAPI and Node.js APIs with SSE streaming, PostgreSQL and MongoDB, per-tenant feature flags, and AWS Lambda and Step Functions jobs feeding Spotlight.', source: 'From his résumé, skills and experience', href: '#skills', jump: 'See the full stack' },
+      sap: { label: 'What did he ship at SAP?', q: 'What did he ship at SAP?', calls: ['query("experience", company="SAP")', 'rank(results, by="scale")'], a: 'Lightweight View Mode for 2k+ enterprise tenants, Horizon theming across 100+ tenants, PyTorch pipelines classifying 5K+ reviews at 96%+ accuracy, and root-cause work that cut L3 incidents by 30%.', source: 'From his résumé, experience', href: '#sap', jump: 'Read the SAP record' },
+      projects: { label: 'What else has he built?', q: 'What else has he built with LLMs?', calls: ['query("projects", tag="llm")'], a: 'InsightAgent, an agentic NL2SQL workflow that raised multi-table query success from 60% to 95%, and a RAG knowledge assistant over 1,000+ documents with 82% Recall@5.', source: 'From his résumé, projects', href: '#work', jump: 'See both projects' },
+      contact: { label: 'How do I reach him?', q: 'How do I reach him?', calls: ['read("resume.pdf", section="contact")'], a: 'Write to pranee16502@gmail.com. That address reaches the human, not me.', source: 'From his résumé, contact', href: '#contact', jump: 'Go to contact details' }
+    };
+  var $ = function (id) { return document.getElementById(id); };
+  var html = document.documentElement;
+
+  // theme
+  var toggle = $('theme-toggle');
+  function isDark() { return html.className === 't-dark'; }
+  function syncLabel() { toggle.setAttribute('aria-label', isDark() ? 'Switch to light mode' : 'Switch to dark mode'); }
+  syncLabel();
+  toggle.addEventListener('click', function () {
+    var next = isDark() ? 'light' : 'dark';
+    html.className = 't-' + next;
+    try { localStorage.setItem('theme', next); } catch (e) {}
+    syncLabel();
+  });
+  if (window.matchMedia) {
+    var mq = matchMedia('(prefers-color-scheme: dark)');
+    var onChange = function (e) {
+      var stored = null;
+      try { stored = localStorage.getItem('theme'); } catch (err) {}
+      if (!stored) { html.className = e.matches ? 't-dark' : 't-light'; syncLabel(); }
+    };
+    if (mq.addEventListener) mq.addEventListener('change', onChange); else if (mq.addListener) mq.addListener(onChange);
+  }
+
+  // agent conversation
+  var el = { qText: $('q-text'), qCaret: $('q-caret'), askMouth: $('ask-mouth'), calls: $('calls'), answerWrap: $('answer-wrap'), aText: $('a-text'), aCaret: $('a-caret'), answerMouth: $('answer-mouth'), doneWrap: $('done-wrap'), source: $('source'), jump: $('jump') };
+  var callTpl = el.calls.firstElementChild.cloneNode(false);
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.chip[data-topic]'));
+  var reduce = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var timer = null;
+
+  function marks(s) {
+    var qEnd = Math.ceil(s.q.length / 2);
+    var callsStart = qEnd + 8;
+    var answerStart = callsStart + s.calls.length * 11 + 4;
+    return { callsStart: callsStart, answerStart: answerStart, end: answerStart + Math.ceil(s.a.length / 4) + 1 };
+  }
+
+  function render(s, t) {
+    var m = marks(s);
+    var qShown = Math.min(s.q.length, t * 2);
+    var callCount = t < m.callsStart ? 0 : Math.min(s.calls.length, Math.floor((t - m.callsStart) / 11) + 1);
+    var aShown = Math.max(0, Math.min(s.a.length, (t - m.answerStart) * 4));
+    var done = aShown >= s.a.length;
+    var qTyping = qShown < s.q.length;
+    var answering = aShown > 0 && !done;
+    el.qText.textContent = s.q.slice(0, qShown);
+    el.qCaret.hidden = !qTyping;
+    el.askMouth.className = qTyping ? 'mouth talk' : 'mouth';
+    while (el.calls.children.length > callCount) el.calls.removeChild(el.calls.lastElementChild);
+    while (el.calls.children.length < callCount) {
+      var c = callTpl.cloneNode(false);
+      c.textContent = '\u2192 ' + s.calls[el.calls.children.length];
+      el.calls.appendChild(c);
+    }
+    el.calls.hidden = callCount === 0;
+    el.answerWrap.hidden = aShown === 0;
+    el.aText.textContent = s.a.slice(0, aShown);
+    el.aCaret.hidden = !answering;
+    el.answerMouth.className = answering ? 'mouth talk' : 'mouth';
+    el.doneWrap.hidden = !done;
+    el.source.textContent = s.source;
+    el.jump.textContent = s.jump;
+    el.jump.setAttribute('href', s.href);
+  }
+
+  function play(key) {
+    clearInterval(timer);
+    var s = S[key] || S.intro;
+    chips.forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-topic') === key)); });
+    el.calls.innerHTML = '';
+    if (reduce) { render(s, 100000); return; }
+    var end = marks(s).end, t = 0;
+    render(s, t);
+    timer = setInterval(function () {
+      t += 1;
+      if (t >= end) { clearInterval(timer); t = 100000; }
+      render(s, t);
+    }, 40);
+  }
+
+  chips.forEach(function (b) { b.addEventListener('click', function () { play(b.getAttribute('data-topic')); }); });
+
+  if (!reduce) {
+    var root = $('root');
+    root.addEventListener('mousemove', function (e) {
+      var x = Math.max(-1, Math.min(1, (e.clientX / (window.innerWidth || 1) - 0.5) * 2));
+      var y = Math.max(-1, Math.min(1, (e.clientY / (window.innerHeight || 1) - 0.5) * 2));
+      root.style.setProperty('--lx', x.toFixed(2));
+      root.style.setProperty('--ly', y.toFixed(2));
     });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    play('intro');
+  }
+})();
 </script>
-
 </body>
 </html>
