@@ -231,7 +231,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 <ul style="margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 8px; color: var(--muted); font-size: 16px">
 <li>Ran the client’s 1,200-scenario business UAT for the Corporate Development rollout, tracing each failed scenario to root cause and driving fixes to release</li>
 <li>Hardened output reaching investors: entity disambiguation for web-research citations and deterministic checks on revenue, funding and currency figures</li>
-<li>Sharply reduced wrong-company data in client reports</li>
+<li>Cut wrong-company citations in client reports from 33% to under 1%</li>
 </ul>
 </article>
 <article class="card" style="box-sizing: border-box; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 30px; display: flex; flex-direction: column; gap: 14px">
@@ -255,7 +255,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 <h2 style="margin: 0; font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(72px, 13vw, 196px); line-height: 0.86; font-weight: 700; letter-spacing: -0.055em">SAP</h2>
 <div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 8px; padding-bottom: 8px">
 <p style="margin: 0; font-size: 17px; font-weight: 600">SAP Analytics Cloud · Software Engineer (Developer Associate) · Jul 2023 to Feb 2026</p>
-<p style="margin: 0; max-width: 30em; font-size: clamp(19px, 1.7vw, 23px); line-height: 1.4; color: var(--muted)">Multi-tenant analytics in React and TypeScript, plus the ML pipelines and production debugging underneath.</p>
+<p style="margin: 0; max-width: 30em; font-size: clamp(19px, 1.7vw, 23px); line-height: 1.4; color: var(--muted)">Multi-tenant analytics in React and TypeScript, agentic NL2SQL and RAG workflows, and the ML pipelines and production debugging underneath.</p>
 </div>
 </div>
 </div>
@@ -291,6 +291,35 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 <h3 style="margin: 0; font-size: 18px; line-height: 1.3; font-weight: 600">View Mode stability across releases</h3>
 <p style="margin: 0; font-size: 15px; opacity: 0.8">Regression validation automated for 20+ analytics workflows, cutting manual verification by 80%.</p>
 </article>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 20px; padding-top: 12px">
+<h3 style="margin: 0; font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(30px, 3.4vw, 46px); line-height: 1; font-weight: 700; letter-spacing: -0.035em">Agentic AI at SAP</h3>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 20px">
+<article style="box-sizing: border-box; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; display: flex; flex-direction: column">
+<img src="assets/insightagent.jpg" alt="InsightAgent answering Top 10 Artist with generated SQL, a results table and a bar chart" style="display: block; width: 100%; height: auto; border-bottom: 1px solid var(--line)">
+<div style="padding: 26px 28px 28px; display: flex; flex-direction: column; gap: 10px">
+<p style="margin: 0; font-family: 'JetBrains Mono', Menlo, monospace; font-size: 13px; color: var(--accent)">Agentic NL2SQL</p>
+<h4 style="margin: 0; font-family: 'Inter Tight', Inter, sans-serif; font-size: 32px; line-height: 1.05; font-weight: 700; letter-spacing: -0.03em">InsightAgent</h4>
+<p style="margin: 0; font-size: 16px; color: var(--muted)">Ask a database a question in plain English. Schema retrieval, SQL validation and self-correcting retries turn it into a query, results and a chart, with evals tracking recall, validity and latency.</p>
+<p style="margin: 0; padding-top: 6px; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap"><span style="font-family: 'Inter Tight', Inter, sans-serif; font-size: 44px; line-height: 1; font-weight: 700; letter-spacing: -0.04em">60% → 95%</span><span style="font-size: 15px; color: var(--muted)">multi-table query success</span></p>
+<a href="https://github.com/praneeth16502/InsightAI-agent" style="align-self: flex-start; font-size: 16px; font-weight: 600; padding: 10px 0">Read the code on GitHub</a>
+</div>
+</article>
+<article style="box-sizing: border-box; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; display: flex; flex-direction: column">
+<div style="padding: 26px 28px 28px; display: flex; flex-direction: column; gap: 10px; flex: 1">
+<p style="margin: 0; font-family: 'JetBrains Mono', Menlo, monospace; font-size: 13px; color: var(--accent)">Retrieval-augmented generation</p>
+<h4 style="margin: 0; font-family: 'Inter Tight', Inter, sans-serif; font-size: 32px; line-height: 1.05; font-weight: 700; letter-spacing: -0.03em">Knowledge assistant</h4>
+<p style="margin: 0; font-size: 16px; color: var(--muted)">An LLM assistant over 1,000+ documents that answers with its sources. Chunking and embedding tuning raised retrieval quality; async retrieval cut response time.</p>
+<div style="display: flex; flex-direction: column; border-top: 1.5px solid var(--ink); margin-top: 6px">
+<p style="margin: 0; padding: 14px 0; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: baseline; gap: 16px"><span style="font-size: 16px">Recall@5</span><span style="font-family: 'Inter Tight', Inter, sans-serif; font-size: 36px; line-height: 1; font-weight: 700; letter-spacing: -0.03em">82%</span></p>
+<p style="margin: 0; padding: 14px 0; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: baseline; gap: 16px"><span style="font-size: 16px">Documents indexed</span><span style="font-family: 'Inter Tight', Inter, sans-serif; font-size: 36px; line-height: 1; font-weight: 700; letter-spacing: -0.03em">1,000+</span></p>
+<p style="margin: 0; padding: 14px 0; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: baseline; gap: 16px"><span style="font-size: 16px">Latency, with async retrieval</span><span style="font-family: 'Inter Tight', Inter, sans-serif; font-size: 36px; line-height: 1; font-weight: 700; letter-spacing: -0.03em; color: var(--accent)">−40%</span></p>
+</div>
+<a href="https://github.com/praneeth16502/rag-knowledge-assistant" style="align-self: flex-start; font-size: 16px; font-weight: 600; padding: 10px 0; margin-top: auto">Read the code on GitHub</a>
+</div>
+</article>
+</div>
 </div>
 </div>
 </section>
@@ -342,15 +371,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 </div>
 </article>
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 48px 32px; padding-top: 24px; border-top: 1px solid var(--band-muted)">
-<article style="display: flex; flex-direction: column; gap: 16px">
-<div style="box-sizing: border-box; border-radius: 20px; overflow: hidden; background: #FFFFFF">
-<img src="assets/insightagent.jpg" alt="InsightAgent answering Top 10 Artist with generated SQL, a results table and a bar chart" style="display: block; width: 100%; height: auto">
-</div>
-<h3 style="margin: 0; font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(32px, 3.4vw, 48px); line-height: 0.95; font-weight: 700; letter-spacing: -0.04em">InsightAgent</h3>
-<p style="margin: 0; font-size: 18px; line-height: 1.45; color: var(--band-muted)">Ask a database a question in plain English. It writes the SQL, runs it, fixes its own errors and charts the answer, on a local Llama 3 so the data never leaves the machine. 90% accuracy on easy questions, 70% on medium.</p>
-<a class="on-band" href="https://github.com/praneeth16502/InsightAI-agent" style="align-self: flex-start; font-size: 17px; font-weight: 600; padding: 8px 0">Read the code on GitHub</a>
-</article>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(460px, 100%), 1fr)); gap: 48px 32px; padding-top: 24px; border-top: 1px solid var(--band-muted)">
 <article style="display: flex; flex-direction: column; gap: 16px">
 <div style="box-sizing: border-box; border-radius: 20px; overflow: hidden; background: #FFFFFF">
 <img src="assets/ott-opportunity-map.jpg" alt="Scatter plot of streaming titles by expected acquisition cost against confidence-adjusted acquisition score" style="display: block; width: 100%; height: auto">
@@ -358,19 +379,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 <h3 style="margin: 0; font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(32px, 3.4vw, 48px); line-height: 0.95; font-weight: 700; letter-spacing: -0.04em">OTT acquisition engine</h3>
 <p style="margin: 0; font-size: 18px; line-height: 1.45; color: var(--band-muted)">Should a streaming service buy this title, on what terms and at what risk, with a fixed budget? A decision engine that models signal, strategy, risk and budget separately and logs a reason for every rejection.</p>
 <a class="on-band" href="https://github.com/praneeth16502/OTT_content_acquisition" style="align-self: flex-start; font-size: 17px; font-weight: 600; padding: 8px 0">Read the code on GitHub</a>
-</article>
-<article style="display: flex; flex-direction: column; gap: 16px">
-<div style="box-sizing: border-box; border: 1px solid var(--band-muted); border-radius: 20px; padding: 28px; display: flex; flex-direction: column; gap: 6px">
-<span style="font-family: 'Inter Tight', Inter, sans-serif; font-size: 28px; font-weight: 700; letter-spacing: -0.03em">PDFs</span>
-<span style="font-size: 15px; color: var(--band-muted)">chunked and embedded with sentence-transformers</span>
-<span style="font-family: 'Inter Tight', Inter, sans-serif; font-size: 28px; font-weight: 700; letter-spacing: -0.03em; padding-top: 8px">FAISS search</span>
-<span style="font-size: 15px; color: var(--band-muted)">finds the passages that answer the question</span>
-<span style="font-family: 'Inter Tight', Inter, sans-serif; font-size: 28px; font-weight: 700; letter-spacing: -0.03em; padding-top: 8px; color: var(--band-accent)">Cited answer</span>
-<span style="font-size: 15px; color: var(--band-muted)">from a local Llama 3, with its sources</span>
-</div>
-<h3 style="margin: 0; font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(32px, 3.4vw, 48px); line-height: 0.95; font-weight: 700; letter-spacing: -0.04em">Knowledge assistant</h3>
-<p style="margin: 0; font-size: 18px; line-height: 1.45; color: var(--band-muted)">Ask questions across many PDFs and get answers that show their sources, with no API bills. FastAPI and LangChain.</p>
-<a class="on-band" href="https://github.com/praneeth16502/rag-knowledge-assistant" style="align-self: flex-start; font-size: 17px; font-weight: 600; padding: 8px 0">Read the code on GitHub</a>
 </article>
 </div>
 </div>
@@ -385,23 +393,23 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 <div style="display: flex; flex-direction: column; border-top: 1.5px solid var(--ink)">
 <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 40px; padding: 18px 0; border-bottom: 1px solid var(--line)">
 <h3 style="margin: 0; flex: 0 1 300px; min-width: 0; font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(24px, 2.6vw, 34px); line-height: 1.05; font-weight: 700; letter-spacing: -0.03em">AI and LLM</h3>
-<p style="margin: 0; flex: 1 1 420px; min-width: 0; font-size: 18px; color: var(--muted)">Multi-agent workflows in LangGraph and LangChain, RAG, LLM evals in LangSmith, tool calling and MCP, structured outputs, PyTorch</p>
+<p style="margin: 0; flex: 1 1 420px; min-width: 0; font-size: 18px; color: var(--muted)">Generative AI, AI agents, agentic workflows, multi-agent orchestration, RAG, NL2SQL, prompt engineering, tool calling, structured outputs, MCP, LLM evals, LangChain, LangGraph, LangSmith, LlamaIndex, vector search (FAISS), embeddings, PyTorch, Hugging Face, NLP</p>
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 40px; padding: 18px 0; border-bottom: 1px solid var(--line)">
 <h3 style="margin: 0; flex: 0 1 300px; min-width: 0; font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(24px, 2.6vw, 34px); line-height: 1.05; font-weight: 700; letter-spacing: -0.03em">Frontend</h3>
-<p style="margin: 0; flex: 1 1 420px; min-width: 0; font-size: 18px; color: var(--muted)">React, TypeScript, Redux Toolkit, Tailwind CSS</p>
+<p style="margin: 0; flex: 1 1 420px; min-width: 0; font-size: 18px; color: var(--muted)">React, TypeScript, JavaScript, Redux Toolkit and RTK Query, Tailwind CSS, Radix and shadcn</p>
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 40px; padding: 18px 0; border-bottom: 1px solid var(--line)">
 <h3 style="margin: 0; flex: 0 1 300px; min-width: 0; font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(24px, 2.6vw, 34px); line-height: 1.05; font-weight: 700; letter-spacing: -0.03em">Backend and data</h3>
-<p style="margin: 0; flex: 1 1 420px; min-width: 0; font-size: 18px; color: var(--muted)">Python, FastAPI, Node.js, SSE streaming, PostgreSQL, MongoDB</p>
+<p style="margin: 0; flex: 1 1 420px; min-width: 0; font-size: 18px; color: var(--muted)">Python, FastAPI, Node.js, Java, Spring Boot, REST APIs, SSE streaming, microservices, SQL, PostgreSQL, MongoDB, DynamoDB, SAP HANA</p>
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 40px; padding: 18px 0; border-bottom: 1px solid var(--line)">
 <h3 style="margin: 0; flex: 0 1 300px; min-width: 0; font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(24px, 2.6vw, 34px); line-height: 1.05; font-weight: 700; letter-spacing: -0.03em">Infra and quality</h3>
-<p style="margin: 0; flex: 1 1 420px; min-width: 0; font-size: 18px; color: var(--muted)">AWS (Lambda, Step Functions, DynamoDB, S3), Docker, CI/CD, Playwright</p>
+<p style="margin: 0; flex: 1 1 420px; min-width: 0; font-size: 18px; color: var(--muted)">AWS (Lambda, Step Functions, DynamoDB, S3), GCP, Docker, CI/CD, Git, Splunk, Grafana, Vitest, Playwright</p>
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 40px; padding: 18px 0; border-bottom: 1px solid var(--line)">
 <h3 style="margin: 0; flex: 0 1 300px; min-width: 0; font-family: 'Inter Tight', Inter, sans-serif; font-size: clamp(24px, 2.6vw, 34px); line-height: 1.05; font-weight: 700; letter-spacing: -0.03em">With clients</h3>
-<p style="margin: 0; flex: 1 1 420px; min-width: 0; font-size: 18px; color: var(--muted)">Customer onboarding, business UAT, production debugging, per-tenant releases</p>
+<p style="margin: 0; flex: 1 1 420px; min-width: 0; font-size: 18px; color: var(--muted)">Forward-deployed engineering, customer onboarding, business UAT, production debugging, per-tenant releases</p>
 </div>
 </div>
 </div>
@@ -492,8 +500,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
       lyzr: { label: 'What is Spotlight?', q: 'What did he build at Lyzr?', calls: ['query("experience", company="Lyzr")', 'rank(results, by="impact")'], a: 'Spotlight, Lyzr’s agentic CVC intelligence platform, used by 50+ clients. Agents unify PitchBook, CB Insights, Crunchbase and LinkedIn into an 88-point explainable score, and a board-deck agent cut analyst evaluation time by 80%.', source: 'From his work at Lyzr', href: '#experience', jump: 'Read the Spotlight record' },
       fde: { label: 'Is he forward deployed?', q: 'Has he worked inside a client’s environment?', calls: ['search("experience", text="UAT")'], a: 'Yes. For Accenture’s Corporate Development rollout he ran the client’s 1,200-scenario business UAT on their environment, traced each failure to root cause and drove fixes to release.', source: 'From his work at Lyzr', href: '#experience', jump: 'See the rollout' },
       stack: { label: 'Full stack too?', q: 'Can he go below the UI?', calls: ['query("skills", area="backend")', 'search("experience", text="streaming")'], a: 'All the way down. React and TypeScript on top, FastAPI and Node.js APIs with SSE streaming, PostgreSQL and MongoDB, per-tenant feature flags, and AWS Lambda and Step Functions jobs feeding Spotlight.', source: 'From his résumé, skills and experience', href: '#skills', jump: 'See the full stack' },
-      sap: { label: 'What did he ship at SAP?', q: 'What did he ship at SAP?', calls: ['query("experience", company="SAP")', 'rank(results, by="scale")'], a: 'Lightweight View Mode for 2k+ enterprise tenants, Horizon theming across 100+ tenants, PyTorch pipelines classifying 5K+ reviews at 96%+ accuracy, and root-cause work that cut L3 incidents by 30%.', source: 'From his résumé, experience', href: '#sap', jump: 'Read the SAP record' },
-      projects: { label: 'What else has he built?', q: 'What else has he built with LLMs?', calls: ['query("projects", tag="llm")'], a: '1of10, three agents that critique and repair each other’s drafts; InsightAgent, a local Llama 3 SQL agent that fixes its own queries; and an OTT acquisition decision engine.', source: 'From his résumé, projects', href: '#work', jump: 'Open the lab' },
+      sap: { label: 'What did he ship at SAP?', q: 'What did he ship at SAP?', calls: ['query("experience", company="SAP")', 'rank(results, by="scale")'], a: 'Lightweight View Mode for 2k+ enterprise tenants, InsightAgent, an agentic NL2SQL workflow that lifted multi-table query success from 60% to 95%, a RAG assistant over 1,000+ documents at 82% Recall@5, and root-cause work that cut L3 incidents by 30%.', source: 'From his résumé, experience', href: '#sap', jump: 'Read the SAP record' },
+      projects: { label: 'What else has he built?', q: 'What else has he built with LLMs?', calls: ['query("projects", tag="llm")'], a: 'nudge, a Claude Code plugin that taps you on the shoulder when Claude is waiting, with 94 tests and CI on three operating systems; 1of10, three agents that critique and repair each other’s drafts; and an OTT acquisition decision engine.', source: 'From his résumé, projects', href: '#work', jump: 'Open the lab' },
       contact: { label: 'How do I reach him?', q: 'How do I reach him?', calls: ['read("resume.pdf", section="contact")'], a: 'Write to pranee16502@gmail.com, or message him on LinkedIn. That address reaches the human, not me. He can join immediately.', source: 'From his résumé, contact', href: '#contact', jump: 'Go to contact details' }
     };
   var $ = function (id) { return document.getElementById(id); };
